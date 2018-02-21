@@ -91,4 +91,16 @@ public class Conexion {
                     + e.getMessage());
         }
     }
+
+    public ResultSet ejecutarQuery(String sql, List<Parametro> lstPar) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ResultSet ejecutarQuery(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int ejecutaComando(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
