@@ -10,31 +10,51 @@ package grupo5banco.rnegocio.entidades;
  * @author stian
  */
 public class Cuecredito {
-     private int codigocc ;
-    private double Valorsobregiro;
-
-    public Cuecredito(int codigocc, double Valorsobregiro) {
-        this.codigocc = codigocc;
-        this.Valorsobregiro = Valorsobregiro;
-    }
+    private int n_cuenta;
+    private Cuentas cuenta;
+    private int saldo;
+    private int u_sobregiro;
 
     public Cuecredito() {
     }
 
-    public int getCodigocc() {
-        return codigocc;
+    public Cuecredito(int n_cuenta, Cuentas cuenta, int saldo, int u_sobregiro) {
+        this.n_cuenta = n_cuenta;
+        this.cuenta = cuenta;
+        this.saldo = saldo;
+        this.u_sobregiro = u_sobregiro;
+    }
+ public int getN_cuenta() {
+        return n_cuenta;
     }
 
-    public void setCodigocc(int codigocc) {
-        this.codigocc = codigocc;
+    public void setN_cuenta(int n_cuenta) {
+        this.n_cuenta = n_cuenta;
     }
 
-    public double getValorsobregiro() {
-        return Valorsobregiro;
+    public Cuentas getCuenta() {
+        return cuenta;
     }
 
-    public void setValorsobregiro(double Valorsobregiro) {
-        this.Valorsobregiro = Valorsobregiro;
+    public void setCuenta(Cuentas cuenta) {
+        this.cuenta = cuenta;
     }
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+
+    public int getU_sobregiro() {
+        return u_sobregiro;
+    }
+
+    public void setU_sobregiro(int u_sobregiro) {
+        this.u_sobregiro = u_sobregiro;
+    }
+
 }
 
