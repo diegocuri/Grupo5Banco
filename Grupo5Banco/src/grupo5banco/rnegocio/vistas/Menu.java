@@ -162,6 +162,12 @@ public class Menu extends JFrame {
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
+    
+    public void mniNuevoPedidoActionPerformed(ActionEvent e) {
+        FrmPedido frm = new FrmPedido();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
 
     public static void main(String[] args) {
         Menu frm = new Menu();
