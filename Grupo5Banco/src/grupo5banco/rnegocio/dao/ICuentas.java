@@ -12,6 +12,6 @@ public interface ICuentas {
       public int insertar(Cuentas cuenta) throws Exception;
     public int modificar(Cuentas cuenta) throws Exception;
     public int eliminar(Cuentas cuenta) throws Exception;
-    public Pedido obtener(int codigo) throws Exception;
+    public Cuentas obtener(int codigo) throws Exception;
     public List<Cuentas> obtener() throws Exception;  
 }
