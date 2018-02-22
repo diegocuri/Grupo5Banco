@@ -17,7 +17,7 @@ public class CuentasImpl implements ICuentas {
         String sql = "insert into cuentas  values "
                 + "(?,?)";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cuenta.getNumerocuenta()));
+        lstPar.add(new Parametro(1, cuenta.getNumerodecuenta()));
 //        lstPar.add(new Parametro(2, cuenta.getCliente().getCodigo_cliente()));
 
         Conexion con = null;
@@ -40,7 +40,7 @@ public class CuentasImpl implements ICuentas {
         String sql = "UPDATE cuentas"
                 + "   SET codCU=?, codigo_cliente=? where id_cuenta=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cuenta.getNumerocuenta()));
+        lstPar.add(new Parametro(1, cuenta.getNumerodecuenta()));
 //        lstPar.add(new Parametro(2, cuenta.getCliente().getCodigo_cliente()));
         Conexion con = null;
         try {
@@ -62,7 +62,7 @@ public class CuentasImpl implements ICuentas {
         int numFilasAfectadas = 0;
          String sql = "DELETE FROM cuenta  where codigo_cuenta=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cuenta.getNumerocuenta()));       
+        lstPar.add(new Parametro(1, cuenta.getNumerodecuenta()));       
         Conexion con = null;
         try {
             con = new Conexion();
@@ -91,7 +91,7 @@ public class CuentasImpl implements ICuentas {
             ResultSet rst = con.ejecutaQuery(sql, lstPar);
             while (rst.next()) {
                 cuenta = new Cuentas();
-                cuenta.setNumerocuenta(rst.getInt(1));
+                cuenta.setNumerodecuenta(rst.getInt(1));
 //                ICliente clientedao= new ClienteImpl();
 //                Cliente cliente=clientedao.obtener(rst.getInt(2));
 //                cuenta.setCliente(cliente);
@@ -119,7 +119,7 @@ public class CuentasImpl implements ICuentas {
             while (rst.next()) {
                 
                 cuenta = new Cuentas();
-                cuenta.setNumerocuenta(rst.getInt(1));
+                cuenta.setNumerodecuenta(rst.getInt(1));
 //                ICliente clientedao= new ClienteImpl();
 //                Cliente cliente=clientedao.obtener(rst.getInt(2));
 //                cuenta.setCliente(cliente);
