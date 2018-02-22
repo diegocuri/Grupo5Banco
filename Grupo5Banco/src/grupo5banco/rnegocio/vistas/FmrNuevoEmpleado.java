@@ -86,13 +86,10 @@ public class FmrNuevoEmpleado extends JInternalFrame {
         pnlCentral.add(txtantiguedad);
      
         lblSucursal = new JLabel("SUCURSAL");
-        cmbSucursal = new JComboBox(new String[]{" Guayaquil", "Quito", "Cuenca", "Santo Domingo", "Machala", "Eloy Alfaro Duran", "Manta", "Portoviejo", "Riobamba", "Ambato"});
+        cmbSucursal = new JComboBox(new String[]{" Ciudad", "Quito", "Cuenca", "Santo Domingo", "Machala", "Eloy Alfaro Duran", "Manta", "Portoviejo", "Riobamba", "Ambato"});
         pnlCentral.add(lblSucursal);
         pnlCentral.add(cmbSucursal);
-        lblCiudad = new JLabel("Ciudad: ");
-        cmdCiudad = new JComboBox(new String[]{"Ciudad"});
-        pnlCentral.add(lblCiudad);
-        pnlCentral.add(cmdCiudad);
+     
         btnLimpiar = new JButton("Limpiar");
         btnAceptar = new JButton("Aceptar");
         btnAceptar.addActionListener(new ActionListener() {
