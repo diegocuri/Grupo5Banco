@@ -124,8 +124,8 @@ public class FmrNuevoEmpleado extends JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error al cargar las ciudades!!",
                     "Error" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
-
     }
+    
     public void btnAceptarActionListener(ActionEvent e) {
         JOptionPane.showMessageDialog(this, "proceso correcto!!",
                 "Transacción", JOptionPane.INFORMATION_MESSAGE);
