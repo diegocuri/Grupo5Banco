@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package grupo5banco.rnegocio.entidades;
-
+import java.util.*;
+import java.sql.*;
 /**
  *
  * @author stian
@@ -25,12 +26,6 @@ public class Cueahorros {
         this.interes = interes;
     }
 
-    public Cueahorros(int n_cuenta, Cuentas cuenta, int saldo, int interes) {
-        this.n_cuenta = n_cuenta;
-        this.cuenta = cuenta;
-        this.saldo = saldo;
-        this.interes = interes;
-    }
 
     public int getN_cuenta() {
         return n_cuenta;
@@ -63,6 +58,4 @@ public class Cueahorros {
     public void setInteres(int interes) {
         this.interes = interes;
     }
-}    
-    
-   
+}
