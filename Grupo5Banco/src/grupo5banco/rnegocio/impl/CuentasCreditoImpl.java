@@ -1,5 +1,8 @@
-
- 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package grupo5banco.rnegocio.impl;
 import grupo5banco.accesodatos.*;
 import grupo5banco.rnegocio.entidades.*;
@@ -7,20 +10,24 @@ import grupo5banco.rnegocio.dao.*;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author stian
  */
-public class CuentasAhorro implements ICu_Ahorro {
-    public int insertar(Cueahorros cueahorros) throws Exception {
+public class CuentasCreditoImpl implements ICu_Credito{
+    
+         @Override
+    
+      public int insertar(Cuecredito cuecredito) throws Exception {
         int numFilasAfectadas = 0;
-        String sql = "insert into cuenta_ahorro  values "
+        String sql = "insert into cuenta_credito  values "
                 + "(?,?,?,?)";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cueahorros.getN_cuenta()));
-        lstPar.add(new Parametro(2, cueahorros.getCuenta().getNumerodecuenta()));
-        lstPar.add(new Parametro(3, cueahorros.getSaldo()));
-        lstPar.add(new Parametro(4, cueahorros.getInteres()));
+        lstPar.add(new Parametro(1, cuecredito.getN_cuenta()));
+        lstPar.add(new Parametro(2, cuecredito.getCuenta().getNumerodecuenta()));
+        lstPar.add(new Parametro(3, cuecredito.getSaldo()));
+        lstPar.add(new Parametro(4, cuecredito.getU_sobregiro()));
         
 
         Conexion con = null;
@@ -38,16 +45,16 @@ public class CuentasAhorro implements ICu_Ahorro {
     }
 
     @Override
-    public int modificar(Cueahorros cueahorros) throws Exception {
+    public int modificar(Cuecredito cuecredito) throws Exception {
         int numFilasAfectadas = 0;
-        String sql = "UPDATE cuenta_ahorro "
-                + "   SET n_cuenta=?, codigo_cuenta=?, saldo=?, interes=?, "
-                        + " where id_cuenta_Ahorros=?";
+        String sql = "UPDATE cuenta_credito"
+                + "   SET n_cuenta=?, codigo_cuenta=?, saldo=?, u_sobregiro=?, "
+                        + " where n_cuenta=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cueahorros.getN_cuenta()));
-        lstPar.add(new Parametro(2, cueahorros.getCuenta().getNumerodecuenta()));
-        lstPar.add(new Parametro(3, cueahorros.getSaldo()));
-        lstPar.add(new Parametro(4, cueahorros.getInteres()));
+        lstPar.add(new Parametro(1, cuecredito.getN_cuenta()));
+        lstPar.add(new Parametro(2, cuecredito.getCuenta().getNumerodecuenta()));
+        lstPar.add(new Parametro(3, cuecredito.getSaldo()));
+        lstPar.add(new Parametro(4, cuecredito.getU_sobregiro()));
         Conexion con = null;
         try {
             con = new Conexion();
@@ -64,11 +71,11 @@ public class CuentasAhorro implements ICu_Ahorro {
     }
 
     @Override
-public int eliminar(Cueahorros cueahorros) throws Exception {
+public int eliminar(Cuecredito cuecredito) throws Exception {
         int numFilasAfectadas = 0;
-         String sql = "DELETE FROM cuenta_ahorro  where n_cuenta=?";
+         String sql = "DELETE FROM cuenta_credito  where n_cuenta=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cueahorros.getN_cuenta()));       
+        lstPar.add(new Parametro(1, cuecredito.getN_cuenta()));       
         Conexion con = null;
         try {
             con = new Conexion();
@@ -85,9 +92,9 @@ public int eliminar(Cueahorros cueahorros) throws Exception {
     }
 
     @Override
-    public Cueahorros obtener(int codigo) throws Exception {
-        Cueahorros cuenta_Ahorros = null;
-        String sql = "SELECT *   FROM cuenta_ahorro  where n_cuenta=?;";
+    public Cuecredito obtener(int codigo) throws Exception {
+        Cuecredito cuenta_Credito = null;
+        String sql = "SELECT *   FROM cuenta_credito where n_cuenta=?;";
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, codigo));
         Conexion con = null;
@@ -96,13 +103,13 @@ public int eliminar(Cueahorros cueahorros) throws Exception {
             con.conectar();
             ResultSet rst = con.ejecutaQuery(sql, lstPar);
             while (rst.next()) {
-                cuenta_Ahorros = new Cueahorros();
-                cuenta_Ahorros.setN_cuenta(rst.getInt(1));
+                cuenta_Credito = new Cuecredito();
+                cuenta_Credito.setN_cuenta(rst.getInt(1));
                 ICuentas cuentadao=new CuentasImpl();
                 Cuentas cuenta=cuentadao.obtener(rst.getInt(2));
-                cuenta_Ahorros.setCuenta(cuenta);
-                cuenta_Ahorros.setSaldo(rst.getInt(3));
-                cuenta_Ahorros.setInteres(rst.getInt(3));
+                cuenta_Credito.setCuenta(cuenta);
+                cuenta_Credito.setSaldo(rst.getInt(3));
+                cuenta_Credito.setU_sobregiro(rst.getInt(4));
             
 
             }
@@ -112,29 +119,29 @@ public int eliminar(Cueahorros cueahorros) throws Exception {
             if(con!=null)
             con.desconectar();
         }
-        return cuenta_Ahorros;
+        return cuenta_Credito;
     }
 
     @Override
     
-    public List<Cueahorros> obtener() throws Exception {
-        List<Cueahorros> lista = new ArrayList<>();
-         String sql = "SELECT *   FROM cuenta_ahorro  ";        
+    public List<Cuecredito> obtener() throws Exception {
+        List<Cuecredito> lista = new ArrayList<>();
+         String sql = "SELECT *   FROM cuenta_credito ";        
         Conexion con = null;
         try {
             con = new Conexion();
             con.conectar();
             ResultSet rst = con.ejecutaQuery(sql, null);
-            Cueahorros cuenta_Ahorros=null;
+            Cuecredito cuenta_Credito=null;
             while (rst.next()) {
-                cuenta_Ahorros = new Cueahorros();
-                cuenta_Ahorros.setN_cuenta(rst.getInt(1));
+                cuenta_Credito = new Cuecredito();
+                cuenta_Credito.setN_cuenta(rst.getInt(1));
                 ICuentas cuentadao=new CuentasImpl();
                 Cuentas cuenta=cuentadao.obtener(rst.getInt(2));
-                cuenta_Ahorros.setCuenta(cuenta);
-                cuenta_Ahorros.setSaldo(rst.getInt(3));
-                cuenta_Ahorros.setInteres(rst.getInt(3));
-                lista.add(cuenta_Ahorros);
+                cuenta_Credito.setCuenta(cuenta);
+                cuenta_Credito.setSaldo(rst.getInt(3));
+                cuenta_Credito.setU_sobregiro(rst.getInt(4));
+                lista.add(cuenta_Credito);
             }
         } catch (Exception e) {
             throw e;
@@ -144,4 +151,6 @@ public int eliminar(Cueahorros cueahorros) throws Exception {
         }
         return lista;
     }
+
+    
 }
