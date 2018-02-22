@@ -100,14 +100,41 @@ public class FrmPedido extends JInternalFrame{
         pnlPie.add(btnAceptar);
     }
     
-   
-    
     
     public static void main(String[] args) {
        FrmPedido frmMenu = new   FrmPedido();
         frmMenu.setVisible(true);
     }
     
+    public void cargarCliente() {
+        ICliente clienteDao = new  ClienteImpl();
+        try {
+            lstCliente = clienteDao.obtener();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar las ciudades!!",
+                    "Error" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void cargarInspector() {
+        IInspector inspectorDao = new  InspectorImpl();
+        try {
+            lstInspector = inspectorDao.obtener();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar las ciudades!!",
+                    "Error" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void cargarPrestamo() {
+        IPrestamo prestamoDao = new  prestamoImpl ();
+        try {
+            lstPrestamo = prestamoDao.obtener();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar las ciudades!!",
+                    "Error" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
     public void btnAceptarActionListener(ActionEvent e) {
         JOptionPane.showMessageDialog(this, "proceso correcto!!",
