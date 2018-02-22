@@ -10,30 +10,59 @@ package grupo5banco.rnegocio.entidades;
  * @author stian
  */
 public class Cueahorros {
-    private int codigoca;
-    private double interes;
-
-    public Cueahorros(int codigoca, double interes) {
-        this.codigoca = codigoca;
-        this.interes = interes;
-    }
+   private int n_cuenta;
+   private Cuentas cuenta;
+   private int saldo;
+   private int interes;
 
     public Cueahorros() {
     }
 
-    public int getCodigoca() {
-        return codigoca;
+    public Cueahorros(int n_cuenta, Cuentas cuenta, int saldo, int interes) {
+        this.n_cuenta = n_cuenta;
+        this.cuenta = cuenta;
+        this.saldo = saldo;
+        this.interes = interes;
     }
 
-    public void setCodigoca(int codigoca) {
-        this.codigoca = codigoca;
+    public Cueahorros(int n_cuenta, Cuentas cuenta, int saldo, int interes) {
+        this.n_cuenta = n_cuenta;
+        this.cuenta = cuenta;
+        this.saldo = saldo;
+        this.interes = interes;
     }
 
-    public double getInteres() {
+    public int getN_cuenta() {
+        return n_cuenta;
+    }
+
+    public void setN_cuenta(int n_cuenta) {
+        this.n_cuenta = n_cuenta;
+    }
+
+    public Cuentas getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuentas cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+
+    public int getInteres() {
         return interes;
     }
 
-    public void setInteres(double interes) {
+    public void setInteres(int interes) {
         this.interes = interes;
     }
-}
+}    
+    
+   
