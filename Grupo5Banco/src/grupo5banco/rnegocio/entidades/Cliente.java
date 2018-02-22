@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package grupo5banco.rnegocio.entidades;
 
-/**
- *
- * @author Usuario
- */
+
 public class Cliente {
     private int CodCL;
+    private Sucursal sucursal;
     private String cedula;
     private String nombre;
     private String apellido;
@@ -20,8 +14,9 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int CodCL, String cedula, String nombre, String apellido, String celular, String email) {
+    public Cliente(int CodCL, Sucursal sucursal, String cedula, String nombre, String apellido, String celular, String email) {
         this.CodCL = CodCL;
+        this.sucursal = sucursal;
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -35,6 +30,14 @@ public class Cliente {
 
     public void setCodCL(int CodCL) {
         this.CodCL = CodCL;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
 
     public String getCedula() {
@@ -76,6 +79,7 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-          
-}
+
+    }
+
+   
