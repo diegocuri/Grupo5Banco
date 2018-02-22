@@ -10,6 +10,6 @@ public interface ICu_Credito {
     public int insertar(Cuecredito cueacredito) throws Exception;
     public int modificar(Cuecredito cueacredito) throws Exception;
     public int eliminar(Cuecredito cueacredito) throws Exception;
-    public Pedido obtener(int codigo) throws Exception;
+    public Cuecredito obtener(int codigo) throws Exception;
     public List<Cuecredito> obtener() throws Exception;  
 }

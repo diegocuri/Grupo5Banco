@@ -7,10 +7,7 @@ package grupo5banco.rnegocio.dao;
 import grupo5banco.rnegocio.entidades.*;
 import java.util.*;
 
-/**
- *
- * @author Usuario
- */
+
 public interface IPedido {
     
     public int insertar(Pedido pedido) throws Exception;
