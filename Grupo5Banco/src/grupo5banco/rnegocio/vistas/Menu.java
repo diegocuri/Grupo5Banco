@@ -24,12 +24,13 @@ public class Menu extends JFrame {
     JMenu mnCuenta;
     JMenu mnSucursal;
     JMenu mnInspector;
+    JMenu mnPedido;
 
-    JMenuItem mniNuevoDocente;
-    JMenuItem mniModificaDocente;
-    JMenuItem mniEliminaDocente;
-    JMenuItem mniBuscaDocente;
-    JMenuItem mniListaDocente;
+    JMenuItem mniNuevoPedido;
+    JMenuItem mniModificaPedido;
+    JMenuItem mniEliminaPedido;
+    JMenuItem mniBuscaPedido;
+    JMenuItem mniListaPedido;
     //** Empleado**
     JMenuItem mniNuevoEmpleado;
     JMenuItem mniModificaEmpleado;
@@ -79,6 +80,23 @@ public class Menu extends JFrame {
         mniEliminaEmpleado = new JMenuItem("Eliminar");
         mniBuscaEmpleado = new JMenuItem("Buscar");
         mniListaEmpleado = new JMenuItem("Lista");
+        
+        
+        mnPedido = new JMenu("Pedido");
+        mniNuevoPedido = new JMenuItem("Nuevo");
+        mniNuevoPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+                  mniNuevoPedidoActionPerformed(e);
+            }
+        });
+        mniModificaPedido = new JMenuItem("Modificar");
+        mniEliminaPedido = new JMenuItem("Eliminar");
+        mniBuscaPedido = new JMenuItem("Buscar");
+        mniListaPedido = new JMenuItem("Lista");
+        
+        
         /////
         mnCliente = new JMenu("Cliente");
         mniNuevoCliente = new JMenuItem("Nuevo");
@@ -107,6 +125,8 @@ public class Menu extends JFrame {
         mniEliminaSucursal = new JMenuItem("Eliminar");
         mniBuscaSucursal = new JMenuItem("Buscar");
         mniListaSucursal = new JMenuItem("Lista");
+        
+        
 
         /////
         mnEmpleado.add(mniNuevoEmpleado);
@@ -136,11 +156,19 @@ public class Menu extends JFrame {
         mnSucursal.addSeparator();
         mnSucursal.add(mniBuscaSucursal);
         mnSucursal.add(mniListaSucursal);
+        
+        mnPedido.add(mniNuevoPedido);
+        mnPedido.add(mniModificaPedido);
+        mnPedido.add(mniEliminaPedido);
+        mnPedido.addSeparator();
+        mnPedido.add(mniBuscaPedido);
+        mnPedido.add(mniListaPedido);
 
         mnbPrincipal.add(mnEmpleado);
         mnbPrincipal.add(mnCliente);
         mnbPrincipal.add(mnInspector);
         mnbPrincipal.add(mnSucursal);
+        mnbPrincipal.add(mnPedido);
         mnInicio.add(mniSalir);
 
         this.setLayout(new BorderLayout());
