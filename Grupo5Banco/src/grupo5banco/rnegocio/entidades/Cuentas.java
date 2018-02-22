@@ -11,34 +11,33 @@ package grupo5banco.rnegocio.entidades;
  */
 public class Cuentas {
     
-
-    
-    private int numerocuenta;
-    private int saldo;
+private int numerodecuenta;
+private Cliente cliente;
 
     public Cuentas() {
     }
 
-    public Cuentas(int numerocuenta, int saldo) {
-        this.numerocuenta = numerocuenta;
-        this.saldo = saldo;
+    public Cuentas(int numerodecuenta, Cliente cliente) {
+        this.numerodecuenta = numerodecuenta;
+        this.cliente = cliente;
     }
 
-    public int getNumerocuenta() {
-        return numerocuenta;
+    public int getNumerodecuenta() {
+        return numerodecuenta;
     }
 
-    public void setNumerocuenta(int numerocuenta) {
-        this.numerocuenta = numerocuenta;
+    public void setNumerodecuenta(int numerodecuenta) {
+        this.numerodecuenta = numerodecuenta;
     }
 
-    public int getSaldo() {
-        return saldo;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setSaldo(int saldo) {
-        this.saldo = saldo;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
-    
+
     
 }
+
