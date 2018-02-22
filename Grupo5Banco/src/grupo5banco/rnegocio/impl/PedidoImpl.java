@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Usuario
  */
-public class PedidoImp implements IPedido{
+public class PedidoImpl implements IPedido{
 
     @Override
     public int insertar(Pedido pedido) throws Exception {
