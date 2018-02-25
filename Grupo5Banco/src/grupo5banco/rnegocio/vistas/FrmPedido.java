@@ -50,6 +50,8 @@ public class FrmPedido extends JInternalFrame{
         
         this.setSize(400, 600);
         this.setLayout(new BorderLayout());
+        this.setClosable(true);
+        
         pnlCentral = new JPanel();
         pnlPie = new JPanel();
 

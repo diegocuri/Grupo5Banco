@@ -95,6 +95,12 @@ public class Menu extends JFrame {
         mniEliminaPedido = new JMenuItem("Eliminar");
         mniBuscaPedido = new JMenuItem("Buscar");
         mniListaPedido = new JMenuItem("Lista");
+         mniListaPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniListaPedidoActionPerformed(e);
+            }
+        });
         
         
         /////
@@ -193,6 +199,12 @@ public class Menu extends JFrame {
     
     public void mniNuevoPedidoActionPerformed(ActionEvent e) {
         FrmPedido frm = new FrmPedido();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+    
+    public void mniListaPedidoActionPerformed(ActionEvent e) {
+        FrmListaPedido frm = new FrmListaPedido();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
