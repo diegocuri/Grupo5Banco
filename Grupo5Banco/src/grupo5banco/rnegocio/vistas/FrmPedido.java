@@ -101,6 +101,10 @@ public class FrmPedido extends JInternalFrame{
                 
         pnlPie.add(btnLimpiar);
         pnlPie.add(btnAceptar);
+        
+        this.add(lblTitulo, BorderLayout.NORTH);
+        this.add(pnlCentral, BorderLayout.CENTER);
+        this.add(pnlPie, BorderLayout.SOUTH);
     }
     
     
@@ -114,7 +118,7 @@ public class FrmPedido extends JInternalFrame{
         try {
             lstCliente = clienteDao.obtener();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar las ciudades!!",
+            JOptionPane.showMessageDialog(this, "Error al cargar el cliente!!",
                     "Error" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -124,7 +128,7 @@ public class FrmPedido extends JInternalFrame{
         try {
             lstInspector = inspectorDao.obtener();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar las ciudades!!",
+            JOptionPane.showMessageDialog(this, "Error al cargar el inspector!!",
                     "Error" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -134,7 +138,7 @@ public class FrmPedido extends JInternalFrame{
         try {
             lstPrestamo = prestamoDao.obtener();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar las ciudades!!",
+            JOptionPane.showMessageDialog(this, "Error al cargar!!",
                     "Error" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
     }
