@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
+
 package grupo5banco.rnegocio.vistas;
 
 import grupo5banco.rnegocio.dao.*;
@@ -63,21 +60,27 @@ public class FrmPedido extends JInternalFrame{
         lblPedido = new JLabel("NUMERO DE PEDIDO: ");
         txtCodPedido = new JTextField(1);
         
-        pnlCentral.add(lblPedido);
-        pnlCentral.add(txtCodPedido);
+        
         
         lblCliente = new JLabel("CODIGO DE CLIENTE");
         cmbCliente = new JComboBox(new String[]{" 001", " 002", " 003", " 004", " 005", " 006"});
-        pnlCentral.add(lblCliente);
-        pnlCentral.add(cmbCliente);
-        
+       
         lbLinspector = new JLabel("CODIGO DE INSPECTOR");
         cmbinspector = new JComboBox(new String[]{" 001", " 002", " 003", " 004", " 005", " 006"});
-        pnlCentral.add(lbLinspector);
-        pnlCentral.add(cmbinspector);
+        
         
         lbLPrestamo = new JLabel("CODIGO DEL PRESTAMO");
         cmbprestamo = new JComboBox(new String[]{" 001", " 002", " 003", " 004", " 005", " 006"});
+        
+        pnlCentral.add(lblPedido);
+        pnlCentral.add(txtCodPedido);
+        
+        pnlCentral.add(lblCliente);
+        pnlCentral.add(cmbCliente);
+        
+        pnlCentral.add(lbLinspector);
+        pnlCentral.add(cmbinspector);
+        
         pnlCentral.add(lbLPrestamo);
         pnlCentral.add(cmbprestamo);
         
@@ -102,8 +105,8 @@ public class FrmPedido extends JInternalFrame{
     
     
     public static void main(String[] args) {
-       FrmPedido frmMenu = new   FrmPedido();
-        frmMenu.setVisible(true);
+       FrmPedido Menu = new   FrmPedido();
+        Menu.setVisible(true);
     }
     
     public void cargarCliente() {
@@ -127,7 +130,7 @@ public class FrmPedido extends JInternalFrame{
     }
     
     public void cargarPrestamo() {
-        IPrestamo prestamoDao = new  prestamoImpl ();
+        IPrestamo prestamoDao = new PrestamoImpl();
         try {
             lstPrestamo = prestamoDao.obtener();
         } catch (Exception e) {
