@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package grupo5banco.rnegocio.vistas;
 
 import grupo5banco.rnegocio.dao.ISucursal;
@@ -21,40 +17,43 @@ import javax.swing.JTextField;
 
 public class FrmNuevoSucursal extends JInternalFrame {
 
-    JPanel pnlCentral;
-    JPanel pnlPie;
-    JLabel lblTitulo;
-    JTextField txtTitulo;
     JLabel lblCodSu;
+    JLabel lblCiudad;
+    JLabel lblTitulo0;
+
     JTextField txtCodSu;
     JTextField txtCiudad;
-    JLabel lblCiudad;
 
     JButton btnLimpiar;
     JButton btnAceptar;
+
+    JPanel pnlCentral;
+    JPanel pnlPie;
 
     public FrmNuevoSucursal() {
         this.setSize(200, 200);
         this.setLayout(new BorderLayout());
         pnlCentral = new JPanel();
         pnlPie = new JPanel();
-
-        pnlCentral.setLayout(new GridLayout(10, 2, 5, 5));
+        pnlCentral.setLayout(new GridLayout(2, 2, 5, 5));
         pnlPie.setLayout(new GridLayout(1, 2, 5, 5));
 
-        lblTitulo = new JLabel("DATOS DE LA SUCURSAL");
-        lblCodSu = new JLabel("CODIGO: ");
+        lblTitulo0 = new JLabel("Datos de la Sucursal");
+
+        lblCodSu = new JLabel("Código:");
+        lblCiudad = new JLabel("Ciudad:");
+
         txtCodSu = new JTextField(2);
-        lblCiudad = new JLabel("CIUDAD: ");
-        txtCiudad= new JTextField(2);
+        txtCiudad = new JTextField(2);
+
+        btnLimpiar = new JButton("Limpiar");
+        btnAceptar = new JButton("Aceptar");
 
         pnlCentral.add(lblCodSu);
         pnlCentral.add(txtCodSu);
         pnlCentral.add(lblCiudad);
         pnlCentral.add(txtCiudad);
 
-        btnLimpiar = new JButton("Limpiar");
-        btnAceptar = new JButton("Aceptar");
         btnAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,17 +64,18 @@ public class FrmNuevoSucursal extends JInternalFrame {
                 }
             }
         });
+
         pnlPie.add(btnLimpiar);
         pnlPie.add(btnAceptar);
 
-        this.add(lblTitulo, BorderLayout.NORTH);
+        this.add(lblTitulo0, BorderLayout.NORTH);
         this.add(pnlCentral, BorderLayout.CENTER);
         this.add(pnlPie, BorderLayout.SOUTH);
         this.setClosable(true);
     }
 
     public static void main(String[] args) {
-       FrmNuevoSucursal frmMenu = new FrmNuevoSucursal();
+        FrmNuevoSucursal frmMenu = new FrmNuevoSucursal();
         frmMenu.setVisible(true);
     }
 
@@ -83,7 +83,7 @@ public class FrmNuevoSucursal extends JInternalFrame {
         try {
             Sucursal sucursal = new Sucursal();
             sucursal.setCodSu(Integer.parseInt(txtCodSu.getText()));
-          sucursal.setCiudad(txtCiudad.getText());
+            sucursal.setCiudad(txtCiudad.getText());
             ISucursal sucursalDao = new SucursalImpl();
             if (sucursalDao.insertar(sucursal) > 0) {
                 JOptionPane.showMessageDialog(this, "Registrado correctamente!!",
@@ -95,4 +95,3 @@ public class FrmNuevoSucursal extends JInternalFrame {
         }
     }
 }
-
