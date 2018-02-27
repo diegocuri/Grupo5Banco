@@ -18,17 +18,19 @@ import java.util.List;
  *
  * @author ANTHONY
  */
-public class PrestamoImpl implements IPrestamo {
+public class PagoImpl implements IPago {
 
     @Override
-    public int insertar(Prestamo prestamo) throws Exception {
+    public int insertar(Pago pago) throws Exception {
          int numFilasAfectadas = 0;
-        String sql = "INSERT INTO prestamo(\n"
-                + "            codPre_prestamo, codSu_sucrusal, )\n"
-                + "    VALUES (?, ?,);";
+        String sql = "INSERT INTO pago(\n"
+                + "            cod_pago, cod_pago,fecha,valor, )\n"
+                + "    VALUES (?, ?, ?, ?);";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, prestamo.getCodPre()));
-        lstPar.add(new Parametro(2, prestamo.getSucursal().getCodSu()));
+        lstPar.add(new Parametro(1, pago.getCod_pago()));
+        lstPar.add(new Parametro(2, pago.getPrestamo().getCodPre()));
+        lstPar.add(new Parametro(3, pago.getFecha_pago()));
+        lstPar.add(new Parametro(4, pago.getValor()));
         
 
         Conexion con = new Conexion();
@@ -45,15 +47,17 @@ public class PrestamoImpl implements IPrestamo {
     }
 
     @Override
-    public int modificar(Prestamo prestamo) throws Exception {
+    public int modificar(Pago pago) throws Exception {
           int numFilasAfectadas = 0;
-        String sql = "UPDATE prestamo\n"
-                + "   SET codPre_prestamo=? ,CodSu=?, \n"
-                + " WHERE codPre_prestamo=?";
+        String sql = "UPDATE pago\n"
+                + "   SET cod_pago=? ,Cod_prestamo=?,fecha_pago=?,valor=?, \n"
+                + " WHERE cod_pago=?";
         Conexion con = new Conexion();
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, prestamo.getCodPre()));
-        lstPar.add(new Parametro(2, prestamo.getSucursal().getCodSu()));
+        lstPar.add(new Parametro(1, pago.getCod_pago()));
+        lstPar.add(new Parametro(2, pago.getPrestamo().getCodPre()));
+        lstPar.add(new Parametro(3, pago.getFecha_pago()));
+        lstPar.add(new Parametro(4, pago.getValor()));
        
 
         con.conectar();
@@ -68,13 +72,13 @@ public class PrestamoImpl implements IPrestamo {
     }
 
     @Override
-    public int eliminar(Prestamo prestamo) throws Exception {
+    public int eliminar(Pago pago) throws Exception {
           int numFilasAfectadas = 0;
-        String sql = "DELETE FROM   Prestamo\n"
-                + " WHERE codPre=?;";
+        String sql = "DELETE FROM   Pago\n"
+                + " WHERE cod_pago=?;";
         Conexion con = new Conexion();
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, prestamo.getCodPre()));
+        lstPar.add(new Parametro(1, pago.getCod_pago()));
         con.conectar();
         try {
             numFilasAfectadas = con.ejecutaComando(sql,lstPar);
@@ -87,51 +91,56 @@ public class PrestamoImpl implements IPrestamo {
     }
 
     @Override
-    public Prestamo obtener(int CodPre) throws Exception {
-        Prestamo prestamo = null;
-        String sql = "SELECT codPre ,codSu, \n"
-                + "  FROM prestamo where codPre=?";
+    public Pago obtener(int Cod_pago) throws Exception {
+        Pago pago = null;
+        String sql = "SELECT cod_pago ,cod_pre,fecha_pago,valor, \n"
+                + "  FROM pago where cod_pago=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, CodPre));
+        lstPar.add(new Parametro(1, Cod_pago));
         Conexion con = null;
         try {
             con = new Conexion();
             con.conectar();
             ResultSet rst = con.ejecutarQuery(sql, lstPar);
             while (rst.next()) {
-                prestamo = new Prestamo();
-                prestamo.setCodPre(rst.getInt(1));
-                ISucursal sucursaldao = new SucursalImpl();
-                Sucursal sucursal = sucursaldao.obtener(rst.getInt(2));
-                prestamo.setSucursal(sucursal);
+                pago = new Pago();
+                pago.setCod_pago(rst.getInt(1));
+                IPrestamo prestamodao = new PrestamoImpl();
+                Prestamo prestamo = prestamodao.obtener(rst.getInt(2));
+                pago.setPrestamo(prestamo);
+                pago.setFecha_pago(rst.getDate(3));
+                pago.setValor(rst.getString(4));
+                
             }
         } catch (Exception e) {
             throw e;
         } finally {
             con.desconectar();
         }
-        return prestamo;
+        return pago;
     }
 
     @Override
-    public List<Prestamo> obtener() throws Exception {
-        List<Prestamo> lista = new ArrayList<>();
-        String sql = "SELECT codPre ,codSu \n"
-                + "  FROM prestamo";
+    public List<Pago> obtener() throws Exception {
+        List<Pago> lista = new ArrayList<>();
+        String sql = "SELECT cod_pago ,cod_pre,fecha,valor \n"
+                + "  FROM pago";
         Conexion con = new Conexion();
         con.conectar();
         try {
             con = new Conexion();
             con.conectar();
             ResultSet rst = con.ejecutarQuery(sql, null);
-            Prestamo prestamo=null;
+            Pago pago=null;
             while (rst.next()) {
-                prestamo = new Prestamo();
-                prestamo.setCodPre(rst.getInt(1));
-                ISucursal sucursaldao = new SucursalImpl();
-                Sucursal sucursal = sucursaldao.obtener(rst.getInt(2));
-                prestamo.setSucursal(sucursal);
-                lista.add(prestamo);
+                pago = new Pago();
+                pago.setCod_pago(rst.getInt(1));
+                IPrestamo prestamodao = new PrestamoImpl();
+                Prestamo prestamo = prestamodao.obtener(rst.getInt(2));
+                pago.setPrestamo(prestamo);
+                pago.setFecha_pago(rst.getDate(3));
+                pago.setValor(rst.getString(4));
+                lista.add(pago);
             }
         } catch (Exception e) {
             throw e;

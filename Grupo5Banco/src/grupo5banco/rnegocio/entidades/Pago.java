@@ -7,16 +7,16 @@ import java.util.Date;
 public class Pago {
     private int cod_pago;
     private Prestamo prestamo;
-    private Date fecha_pre;
+    private Date fecha_pago;
     private String valor;
 
     public Pago() {
     }
 
-    public Pago(int cod_pago, Prestamo prestamo, Date fecha_pre, String valor) {
+    public Pago(int cod_pago, Prestamo prestamo, Date fecha_pago, String valor) {
         this.cod_pago = cod_pago;
         this.prestamo = prestamo;
-        this.fecha_pre = fecha_pre;
+        this.fecha_pago = fecha_pago;
         this.valor = valor;
     }
 
@@ -36,12 +36,12 @@ public class Pago {
         this.prestamo = prestamo;
     }
 
-    public Date getFecha_pre() {
-        return fecha_pre;
+    public Date getFecha_pago() {
+        return fecha_pago;
     }
 
-    public void setFecha_pre(Date fecha_pre) {
-        this.fecha_pre = fecha_pre;
+    public void setFecha_pago(Date fecha_pago) {
+        this.fecha_pago = fecha_pago;
     }
 
     public String getValor() {
@@ -51,5 +51,6 @@ public class Pago {
     public void setValor(String valor) {
         this.valor = valor;
     }
+
     
 }
