@@ -1,5 +1,5 @@
-
 package grupo5banco.rnegocio.impl;
+
 import grupo5banco.accesodatos.Conexion;
 import grupo5banco.accesodatos.Parametro;
 import grupo5banco.rnegocio.dao.IEmpleado;
@@ -13,9 +13,9 @@ public class EmpleadoImpl implements IEmpleado {
 
     @Override
     public int insertar(Empleado empleado) throws Exception {
-         int numFilasAfectadas = 0;
+        int numFilasAfectadas = 0;
         String sql = "INSERT INTO empleado(\n"
-                + "            codEpl,id_sucursal, nombre, apellido, fecha_vinculacion,antiguedad, )\n"
+                + "            codEpl,codSu, nombre, apellido, fecha_vinculacion,antiguedad, )\n"
                 + "    VALUES (?, ?, ?, ?, ?, ?);";
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, empleado.getCodEpl()));
@@ -24,7 +24,6 @@ public class EmpleadoImpl implements IEmpleado {
         lstPar.add(new Parametro(4, empleado.getApellido()));
         lstPar.add(new Parametro(5, empleado.getFecha_vinculacion()));
         lstPar.add(new Parametro(6, empleado.getAntiguedad()));
-
 
         Conexion con = new Conexion();
         con.conectar();
@@ -36,15 +35,14 @@ public class EmpleadoImpl implements IEmpleado {
             con.desconectar();
         }
         return numFilasAfectadas;
-      
+
     }
 
     @Override
     public int modificar(Empleado empleado) throws Exception {
-          int numFilasAfectadas = 0;
+        int numFilasAfectadas = 0;
         String sql = "UPDATE empleado\n"
-                + "   SET codSu=? ,codSu_sucursal=? nombre=?, apellido=?, fecha_vinculacion=?, antiguedad=?, , \n"
-                + "       id_jefe=?, \n"
+                + "   SET codEpl=? ,codSu=? nombre=?, apellido=?, fecha_vinculacion=?, antiguedad=?, , \n"
                 + " WHERE codSu=?";
         Conexion con = new Conexion();
         List<Parametro> lstPar = new ArrayList<>();
@@ -68,7 +66,7 @@ public class EmpleadoImpl implements IEmpleado {
 
     @Override
     public int eliminar(Empleado empleado) throws Exception {
-          int numFilasAfectadas = 0;
+        int numFilasAfectadas = 0;
         String sql = "DELETE FROM   Empleado\n"
                 + " WHERE codEpl=?;";
         Conexion con = new Conexion();
@@ -76,7 +74,7 @@ public class EmpleadoImpl implements IEmpleado {
         lstPar.add(new Parametro(1, empleado.getCodEpl()));
         con.conectar();
         try {
-            numFilasAfectadas = con.ejecutaComando(sql,lstPar);
+            numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
             throw e;
         } finally {
@@ -88,7 +86,7 @@ public class EmpleadoImpl implements IEmpleado {
     @Override
     public Empleado obtener(int codEpl) throws Exception {
         Empleado empleado = null;
-        String sql = "SELECT codEpl ,codSu_sucursal, nombre, apellido, fecha_viculacion,antiguedad \n"
+        String sql = "SELECT codEpl ,codSu, nombre, apellido, fecha_viculacion,antiguedad \n"
                 + "  FROM empleado where codEpl=?";
         Conexion con = new Conexion();
 
@@ -102,11 +100,11 @@ public class EmpleadoImpl implements IEmpleado {
                 ISucursal su = new SucursalImpl();
                 empleado = new Empleado();
                 empleado.setCodEpl(rst.getInt(1));
-                 empleado.setSucursal(su.obtener(rst.getInt(2)));
+                empleado.setSucursal(su.obtener(rst.getInt(2)));
                 empleado.setNombre(rst.getString(3));
                 empleado.setApellido(rst.getString(4));
                 empleado.setFecha_vinculacion(rst.getDate(5));
-                empleado.setAntiguedad(rst.getInt(5));
+                empleado.setAntiguedad(rst.getInt(6));
             }
         } catch (Exception e) {
             throw e;
@@ -119,7 +117,7 @@ public class EmpleadoImpl implements IEmpleado {
     @Override
     public List<Empleado> obtener() throws Exception {
         List<Empleado> lista = new ArrayList<>();
-        String sql = "SELECT codEpl ,codSu_sucursal, nombre, apellido, fecha_viculacion,antiguedad \n"
+        String sql = "SELECT codEpl ,codSu, nombre, apellido, fecha_viculacion,antiguedad \n"
                 + "  FROM empleado";
         Conexion con = new Conexion();
         con.conectar();
@@ -131,11 +129,11 @@ public class EmpleadoImpl implements IEmpleado {
                 ISucursal su = new SucursalImpl();
                 empleado = new Empleado();
                 empleado.setCodEpl(rst.getInt(1));
-                 empleado.setSucursal(su.obtener(rst.getInt(2)));
+                empleado.setSucursal(su.obtener(rst.getInt(2)));
                 empleado.setNombre(rst.getString(3));
                 empleado.setApellido(rst.getString(4));
                 empleado.setFecha_vinculacion(rst.getDate(5));
-                empleado.setAntiguedad(rst.getInt(5));
+                empleado.setAntiguedad(rst.getInt(6));
                 lista.add(empleado);
             }
         } catch (Exception e) {
@@ -146,7 +144,4 @@ public class EmpleadoImpl implements IEmpleado {
         return lista;
     }
 
-    }
-
-
-
+}
