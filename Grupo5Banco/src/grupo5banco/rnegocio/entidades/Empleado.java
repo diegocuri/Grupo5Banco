@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package grupo5banco.rnegocio.entidades;
+
 import java.util.*;
+
 public class Empleado {
 
     private int codEpl;
@@ -12,7 +14,7 @@ public class Empleado {
     private String nombre;
     private String apellido;
     private Date fecha_vinculacion;
-    private int antiguedad ; 
+    private int antiguedad;
 
     public Empleado() {
     }
@@ -73,7 +75,10 @@ public class Empleado {
     public void setAntiguedad(int antiguedad) {
         this.antiguedad = antiguedad;
     }
-    
-    
-}
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
+}
