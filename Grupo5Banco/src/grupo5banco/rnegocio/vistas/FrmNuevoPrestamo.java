@@ -31,11 +31,13 @@ public class FrmNuevoPrestamo extends JInternalFrame  {
     List<Sucursal> lstSucursal;
     JComboBox<Sucursal> cmbSucursal;
 
+    JLabel lblTitulo0;
     JLabel lblCodPre;
-    JLabel lblCodSu;
-    JLabel lblTitulo;
-    
     JTextField txtCodPre;
+    JLabel lblCodSu;
+    
+    
+   
 
  
     JButton btnLimpiar;
@@ -45,29 +47,28 @@ public class FrmNuevoPrestamo extends JInternalFrame  {
     JPanel pnlPie;
 
     public FrmNuevoPrestamo() {
-        this.setSize(300, 300);
+        this.setSize(200, 200);
         this.setLayout(new BorderLayout());
-        this.setClosable(true);
+        
         pnlCentral= new JPanel();
         pnlPie= new JPanel();
-        pnlCentral.setLayout(new GridLayout(10, 2, 5, 5));
+        pnlCentral.setLayout(new GridLayout(2, 2, 5, 5));
         pnlPie.setLayout(new GridLayout(1,2,5,5));
 
-        lblTitulo = new JLabel("DATOS DE PEDIDO");
+        lblTitulo0 = new JLabel("DATOS DE PEDIDO");
         lblCodPre = new JLabel("codigo prestamo: ");
-        txtCodPre = new JTextField(1);
+        txtCodPre = new JTextField(2);
         lblCodSu = new JLabel("PRESTAMO:");
         cargarSucursal();
         cmbSucursal= new JComboBox(lstSucursal.toArray());
-     
+        btnLimpiar = new JButton("Limpiar");
+        btnAceptar = new JButton("Aceptar");
   
         pnlCentral.add(lblCodPre);
         pnlCentral.add(txtCodPre);
         pnlCentral.add(lblCodSu);
         pnlCentral.add(cmbSucursal);
-        
-        btnLimpiar = new JButton("Limpiar");
-        btnAceptar = new JButton("Aceptar");
+        ;
         btnAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,7 +81,7 @@ public class FrmNuevoPrestamo extends JInternalFrame  {
         });        
         pnlPie.add(btnLimpiar);
         pnlPie.add(btnAceptar);        
-        this.add(lblTitulo, BorderLayout.NORTH);
+        this.add(lblTitulo0, BorderLayout.NORTH);
         this.add(pnlCentral, BorderLayout.CENTER);
         this.add(pnlPie, BorderLayout.SOUTH);        
     }

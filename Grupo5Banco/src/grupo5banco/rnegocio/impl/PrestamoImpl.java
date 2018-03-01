@@ -8,8 +8,10 @@ package grupo5banco.rnegocio.impl;
 
 import grupo5banco.accesodatos.Conexion;
 import grupo5banco.accesodatos.Parametro;
-import grupo5banco.rnegocio.dao.*;
-import grupo5banco.rnegocio.entidades.*;
+import grupo5banco.rnegocio.dao.IPrestamo;
+import grupo5banco.rnegocio.dao.ISucursal;
+import grupo5banco.rnegocio.entidades.Prestamo;
+import grupo5banco.rnegocio.entidades.Sucursal;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class PrestamoImpl implements IPrestamo {
          int numFilasAfectadas = 0;
         String sql = "INSERT INTO prestamo(\n"
                 + "            codPre_prestamo, codSu_sucrusal, )\n"
-                + "    VALUES (?, ?,);";
+                + "    VALUES (?, ?);";
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, prestamo.getCodPre()));
         lstPar.add(new Parametro(2, prestamo.getSucursal().getCodSu()));
@@ -91,12 +93,12 @@ public class PrestamoImpl implements IPrestamo {
         Prestamo prestamo = null;
         String sql = "SELECT codPre ,codSu, \n"
                 + "  FROM prestamo where codPre=?";
+       Conexion con=new Conexion();
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, CodPre));
-        Conexion con = null;
+        con.conectar();
         try {
-            con = new Conexion();
-            con.conectar();
+            
             ResultSet rst = con.ejecutarQuery(sql, lstPar);
             while (rst.next()) {
                 prestamo = new Prestamo();
