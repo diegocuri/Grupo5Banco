@@ -134,6 +134,12 @@ public class Menu extends JFrame {
         mniModificaInspector = new JMenuItem("Modificar");
         mniEliminaInspector = new JMenuItem("Eliminar");
         mniBuscaInspector = new JMenuItem("Buscar");
+        mniBuscaInspector.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniBuscaInspectorActionPerformed(e);
+            }           
+        });
         mniListaInspector = new JMenuItem("Lista");
         
         //** Prestamo**
@@ -288,6 +294,11 @@ public class Menu extends JFrame {
     
     public void mniListaPagoActionPerformed(ActionEvent e) {
         FrmListaPago frm = new FrmListaPago();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+    public void mniBuscaInspectorActionPerformed(ActionEvent e){
+        FrmBuscarInspector frm = new FrmBuscarInspector();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
