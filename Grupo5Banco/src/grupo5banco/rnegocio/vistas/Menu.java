@@ -7,9 +7,11 @@ package grupo5banco.rnegocio.vistas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class Menu extends JFrame {
 
@@ -24,6 +26,8 @@ public class Menu extends JFrame {
     JMenu mnCuenta;
     JMenu mnSucursal;
     JMenu mnInspector;
+    JMenu mnPrestamo;
+    JMenu mnPago;
     JMenu mnPedido;
 
     JMenuItem mniNuevoPedido;
@@ -43,19 +47,32 @@ public class Menu extends JFrame {
     JMenuItem mniEliminaCliente;
     JMenuItem mniBuscaCliente;
     JMenuItem mniListaCliente;
-    
-    //Inspector
+
     JMenuItem mniNuevoInspector;
     JMenuItem mniModificaInspector;
     JMenuItem mniEliminaInspector;
     JMenuItem mniBuscaInspector;
     JMenuItem mniListaInspector;
+    
+    JMenuItem mniNuevoPrestamo;
+    JMenuItem mniModificaPrestamo;
+    JMenuItem mniEliminaPrestamo;
+    JMenuItem mniBuscaPrestamo;
+    JMenuItem mniListaPrestamo;
+    
+    JMenuItem mniNuevoPago;
+    JMenuItem mniModificaPago;
+    JMenuItem mniEliminaPago;
+    JMenuItem mniBuscaPago;
+    JMenuItem mniListaPago;
     //** sucursal**
     JMenuItem mniNuevoSucursal;
     JMenuItem mniModificaSucursal;
     JMenuItem mniEliminaSucursal;
     JMenuItem mniBuscaSucursal;
     JMenuItem mniListaSucursal;
+    
+    
 
     JDesktopPane dkpEscritorio;
 
@@ -114,24 +131,38 @@ public class Menu extends JFrame {
 
         mnInspector = new JMenu("Inspector");
         mniNuevoInspector = new JMenuItem("Nuevo");
-        mniNuevoInspector.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mniNuevoInspectorActionPerformed(e);
-            }
-        });
-        
         mniModificaInspector = new JMenuItem("Modificar");
         mniEliminaInspector = new JMenuItem("Eliminar");
         mniBuscaInspector = new JMenuItem("Buscar");
         mniListaInspector = new JMenuItem("Lista");
-        mniListaInspector.addActionListener(new ActionListener() {
+        
+        //** Prestamo**
+        mnPrestamo = new JMenu("Prestamo");
+        mniNuevoPrestamo = new JMenuItem("Nuevo");
+        mniNuevoPrestamo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mniListaInspectorActionPerformed(e);
+                mniNuevoPrestamoActionPerformed(e);
             }
         });
-        
+        mniModificaPrestamo = new JMenuItem("Modificar");
+        mniEliminaPrestamo = new JMenuItem("Eliminar");
+        mniBuscaPrestamo = new JMenuItem("Buscar");
+        mniListaPrestamo = new JMenuItem("Lista");
+        //** Pago**
+        mnPago = new JMenu("Pago");
+        mniNuevoPago = new JMenuItem("Nuevo");
+        mniNuevoPago.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniNuevoPagoActionPerformed(e);
+            }
+        });
+        mniModificaPago = new JMenuItem("Modificar");
+        mniEliminaPago = new JMenuItem("Eliminar");
+        mniBuscaPago = new JMenuItem("Buscar");
+        mniListaPago = new JMenuItem("Lista");
+
         //** sucursal**
         mnSucursal = new JMenu("Sucursal");
         mniNuevoSucursal = new JMenuItem("Nuevo");
@@ -176,6 +207,20 @@ public class Menu extends JFrame {
         mnSucursal.addSeparator();
         mnSucursal.add(mniBuscaSucursal);
         mnSucursal.add(mniListaSucursal);
+        
+        mnPrestamo.add(mniNuevoPrestamo);
+        mnPrestamo.add(mniModificaPrestamo);
+        mnPrestamo.add(mniEliminaPrestamo);
+        mnPrestamo.addSeparator();
+        mnPrestamo.add(mniBuscaPrestamo);
+        mnPrestamo.add(mniListaPrestamo);
+        
+        mnPago.add(mniNuevoPago);
+        mnPago.add(mniModificaPago);
+        mnPago.add(mniEliminaPago);
+        mnPago.addSeparator();
+        mnPago.add(mniBuscaPago);
+        mnPago.add(mniListaPago);
         
         mnPedido.add(mniNuevoPedido);
         mnPedido.add(mniModificaPedido);
@@ -223,14 +268,26 @@ public class Menu extends JFrame {
         frm.setVisible(true);
     }
     
-    public void mniNuevoInspectorActionPerformed(ActionEvent e) {
-        FrmNuevoInspector frm = new FrmNuevoInspector();
+    public void mniNuevoPrestamoActionPerformed(ActionEvent e) {
+        FrmNuevoPrestamo frm = new FrmNuevoPrestamo();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
     
-    public void mniListaInspectorActionPerformed(ActionEvent e) {
-        FrmListaInspector frm = new FrmListaInspector();
+    public void mniListaPrestamoActionPerformed(ActionEvent e) {
+        FrmListaPrestamo frm = new FrmListaPrestamo();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+    
+    public void mniNuevoPagoActionPerformed(ActionEvent e) {
+        FrmNuevoPago frm = new FrmNuevoPago();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+    
+    public void mniListaPagoActionPerformed(ActionEvent e) {
+        FrmListaPago frm = new FrmListaPago();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
