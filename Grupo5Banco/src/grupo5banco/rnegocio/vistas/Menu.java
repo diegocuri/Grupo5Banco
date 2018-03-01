@@ -43,7 +43,8 @@ public class Menu extends JFrame {
     JMenuItem mniEliminaCliente;
     JMenuItem mniBuscaCliente;
     JMenuItem mniListaCliente;
-
+    
+    //Inspector
     JMenuItem mniNuevoInspector;
     JMenuItem mniModificaInspector;
     JMenuItem mniEliminaInspector;
@@ -113,11 +114,24 @@ public class Menu extends JFrame {
 
         mnInspector = new JMenu("Inspector");
         mniNuevoInspector = new JMenuItem("Nuevo");
+        mniNuevoInspector.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniNuevoInspectorActionPerformed(e);
+            }
+        });
+        
         mniModificaInspector = new JMenuItem("Modificar");
         mniEliminaInspector = new JMenuItem("Eliminar");
         mniBuscaInspector = new JMenuItem("Buscar");
         mniListaInspector = new JMenuItem("Lista");
-
+        mniListaInspector.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniListaInspectorActionPerformed(e);
+            }
+        });
+        
         //** sucursal**
         mnSucursal = new JMenu("Sucursal");
         mniNuevoSucursal = new JMenuItem("Nuevo");
@@ -205,6 +219,18 @@ public class Menu extends JFrame {
     
     public void mniListaPedidoActionPerformed(ActionEvent e) {
         FrmListaPedido frm = new FrmListaPedido();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+    
+    public void mniNuevoInspectorActionPerformed(ActionEvent e) {
+        FrmNuevoInspector frm = new FrmNuevoInspector();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+    
+    public void mniListaInspectorActionPerformed(ActionEvent e) {
+        FrmListaInspector frm = new FrmListaInspector();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
