@@ -22,142 +22,139 @@ import javax.swing.JTextField;
 import javax.swing.*;
 import java.util.List;
 
-public class FrmNuevoEmpleado extends JInternalFrame {
-
+public class FrmNuevoEmpleado extends JInternalFrame{
     List<Sucursal> lstSucursal;
     JComboBox<Sucursal> cmbSucursal;
-    JLabel lblTitulo;
-    JTextField txtTitulo;
-    JLabel lblCodEpl;
-    JTextField txtCodEpl;
+    JLabel lblCodigo;
     JLabel lblSucursal;
-    JLabel lblNombre;
-    JTextField txtNombre;
-    JLabel lblApellido;
-    JTextField txtApellido;
-    JLabel lblfecha_vinculacion;
-    JTextField txtfecha_vinculacion;
-    JLabel lblantiguedad;
-    JTextField txtantiguedad;
-
+    JLabel lblNombres;
+    JLabel lblApellidos;
+    JLabel lblFecha_Vinculacion;
+    JLabel lblAntiguedad;
+   
+    JLabel lblTitulo0;
+    
+    JTextField txtCodigo;
+    JTextField txtNombres;
+    JTextField txtApellidos;
+    JTextField txtFecha_Vinculacion;
+    JTextField txtAntiguedad;
+    
     JButton btnLimpiar;
     JButton btnAceptar;
+    
     JPanel pnlCentral;
     JPanel pnlPie;
-
     public FrmNuevoEmpleado() {
         this.setSize(300, 300);
         this.setLayout(new BorderLayout());
         this.setClosable(true);
-        pnlCentral = new JPanel();
-        pnlPie = new JPanel();
+        pnlCentral= new JPanel();
+        pnlPie= new JPanel();
         pnlCentral.setLayout(new GridLayout(10, 2, 5, 5));
-        pnlPie.setLayout(new GridLayout(1, 2, 5, 5));
+        pnlPie.setLayout(new GridLayout(1,2,5,5));
+        
+        lblTitulo0 = new JLabel("Datos Empleado");
+        
+        lblCodigo= new JLabel("Código:");
+        lblNombres= new JLabel("Nombres:");
+        lblApellidos= new JLabel("Apellidos:");
+        lblFecha_Vinculacion= new JLabel("Fecha Nacimiento:");
+        lblAntiguedad= new JLabel("Fecha Ingreso:");
+        lblSucursal= new JLabel("Sucursal:");
 
-        lblTitulo = new JLabel("DATOS DEL EMPLEADO");
-        lblCodEpl = new JLabel("CODIGO: ");
-        txtCodEpl = new JTextField(1);
-        lblSucursal = new JLabel("SUCURSAL:");
-        lblNombre = new JLabel("NOMBRE: ");
-        txtNombre = new JTextField(2);
-        lblApellido = new JLabel("APELLIDO: ");
-        txtApellido = new JTextField(2);
-        lblfecha_vinculacion = new JLabel("FECHA VINCULACION: ");
-        txtfecha_vinculacion = new JTextField(2);
-        lblantiguedad = new JLabel("ANTIGUEDAD: ");
-        txtantiguedad = new JTextField(2);
-
-        txtCodEpl = new JTextField(2);
-        txtCodEpl = new JTextField(2);
-        txtNombre = new JTextField(2);
-        txtApellido = new JTextField(2);
-        txtfecha_vinculacion = new JTextField(2);
-        txtfecha_vinculacion = new JTextField(2);
-        txtantiguedad = new JTextField(2);
-        // cmbSexo = new JComboBox(new String[]{"masculino", "femenino"});
-        cargarSucursal();
-        cmbSucursal = new JComboBox(lstSucursal.toArray());
-        btnLimpiar = new JButton("Limpiar");
-        btnAceptar = new JButton("Aceptar");
-
-        pnlCentral.add(lblCodEpl);
-        pnlCentral.add(txtCodEpl);
+        txtCodigo = new JTextField(2);
+        txtNombres= new JTextField(2);
+        txtApellidos= new JTextField(2);
+        txtFecha_Vinculacion= new JTextField(2);
+       txtAntiguedad= new JTextField(2);
+        
+       cargarSucursals();
+        cmbSucursal= new JComboBox(lstSucursal.toArray());
+        btnLimpiar= new JButton("Limpiar");
+        btnAceptar= new JButton("Aceptar");
+        
+        pnlCentral.add(lblCodigo);
+        pnlCentral.add(txtCodigo);
+        pnlCentral.add(lblNombres);
+        pnlCentral.add(txtNombres);
+        pnlCentral.add(lblApellidos);
+        pnlCentral.add(txtApellidos);
+        pnlCentral.add(lblFecha_Vinculacion);
+        pnlCentral.add(txtFecha_Vinculacion);
+        pnlCentral.add(lblAntiguedad);
+        pnlCentral.add(txtAntiguedad);
+        
         pnlCentral.add(lblSucursal);
         pnlCentral.add(cmbSucursal);
-        pnlCentral.add(lblNombre);
-        pnlCentral.add(txtNombre);
-        pnlCentral.add(lblApellido);
-        pnlCentral.add(txtApellido);
-        pnlCentral.add(lblfecha_vinculacion);
-        pnlCentral.add(txtfecha_vinculacion);
-        pnlCentral.add(lblantiguedad);
-        pnlCentral.add(txtantiguedad);
-
+        
+                
         btnAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     btnAceptarActionListener(e);
                 } catch (Exception ex) {
-                    System.out.println("Error:" + ex.getMessage());
+                    System.out.println("Error:"+ex.getMessage());
                 }
             }
         });
-
+        
         pnlPie.add(btnLimpiar);
         pnlPie.add(btnAceptar);
-
-        this.add(lblTitulo, BorderLayout.NORTH);
+        
+        this.add(lblTitulo0, BorderLayout.NORTH);
         this.add(pnlCentral, BorderLayout.CENTER);
-        this.add(pnlPie, BorderLayout.SOUTH);
+        this.add(pnlPie, BorderLayout.SOUTH);        
     }
-
     public static void main(String[] args) {
-        FrmNuevoEmpleado frmMenu = new FrmNuevoEmpleado();
+        FrmNuevoEmpleado frmMenu= new FrmNuevoEmpleado();
         frmMenu.setVisible(true);
-    }
-
-    public void cargarSucursal() {
+    } 
+    public void cargarSucursals(){
         ISucursal sucursalDao = new SucursalImpl();
         try {
             lstSucursal = sucursalDao.obtener();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar las sucursales!!",
-                    "Error" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
-        }
-
+            JOptionPane.showMessageDialog(this,"Error al cargar los sucursals!!",
+                "Error"+e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }       
     }
-
-    public void btnAceptarActionListener(ActionEvent e) {
+    public void btnAceptarActionListener(ActionEvent e){
         IEmpleado empleadoDao = new EmpleadoImpl();
         Empleado empleado = new Empleado();
-        empleado.setCodEpl(Integer.parseInt(txtCodEpl.getText()));
+        empleado.setCodEpl(Integer.parseInt(txtCodigo.getText()));
         empleado.setSucursal((Sucursal) cmbSucursal.getSelectedItem());
-        empleado.setNombre(txtNombre.getText());
-        empleado.setApellido(txtApellido.getText());
-
+        empleado.setNombre(txtNombres.getText());
+        empleado.setApellido(txtApellidos.getText());
+          
         DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            empleado.setFecha_vinculacion(formatoFecha.parse(txtfecha_vinculacion.getText()));
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error en la fecha!!",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        empleado.setAntiguedad(Integer.parseInt(txtantiguedad.getText()));
-
-        try {
-            if (empleadoDao.insertar(empleado) > 0) {
-                JOptionPane.showMessageDialog(this, "Guardado Correctamente!!",
-                        "Transacción", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Error desconocido: ",
-                        "Error", JOptionPane.ERROR_MESSAGE);
+        
+        try {                        
+            empleado.setFecha_vinculacion(formatoFecha.parse(txtFecha_Vinculacion.getText()));
+            
+            } catch (Exception ex) {
+              JOptionPane.showMessageDialog(this,"Error en la fecha!!",
+                "Transacción", JOptionPane.INFORMATION_MESSAGE);
             }
+    
+    empleado.setAntiguedad(Integer.parseInt(txtAntiguedad.getText()));  
+        
+    
+        
+        try {
+            if(empleadoDao.insertar(empleado)>0){
+                JOptionPane.showMessageDialog(this,"Guaradado correctamente!!",
+                "Transacción", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"Error desconocido!!",
+                "Transacción", JOptionPane.INFORMATION_MESSAGE);
+            }           
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error al guardar!!: " + ex.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Error al guardar!!: " + ex.getMessage(),
+                "Error", JOptionPane.INFORMATION_MESSAGE);
         }
-
+        
     }
 }
+ 

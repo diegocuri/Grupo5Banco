@@ -1,68 +1,52 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package grupo5banco.rnegocio.vistas;
 
-
-import grupo5banco.rnegocio.dao.ICliente;
-import grupo5banco.rnegocio.entidades.Cliente;
-import grupo5banco.rnegocio.impl.ClienteImpl;
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import sun.awt.DefaultMouseInfoPeer;
+import java.util.*;
+import grupo5banco.rnegocio.dao.*;
+import grupo5banco.rnegocio.impl.*;
+import grupo5banco.rnegocio.entidades.*;
 
-public class FrmListaCliente extends JInternalFrame{
+public class FrmListaCliente extends JInternalFrame {
+
     JLabel lblTitulo;
     JTable tabla;
     DefaultTableModel modelo;
-    
-    public FrmListaCliente(){
+    JScrollPane jscTabla;
+    public FrmListaCliente() {
         this.setSize(800, 600);
         this.setLayout(new BorderLayout());
         this.setClosable(true);
-        lblTitulo = new JLabel("Listado clientes");
+        lblTitulo= new JLabel("Listado de Clientes");
         tabla = new JTable();
+        jscTabla= new JScrollPane(tabla);
         this.add(lblTitulo, BorderLayout.NORTH);
-        this.add(tabla, BorderLayout.CENTER);
-        cargarTabla();
-        
+        this.add(jscTabla, BorderLayout.CENTER);
+        cargarTabla();        
     }
     public void cargarTabla(){
-        modelo = new  DefaultTableModel();
-        modelo.addColumn("Codigo");
-        modelo.addColumn("Sucursal");
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Código");
+        modelo.addColumn("Sucursal");        
         modelo.addColumn("Cedula");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
-        modelo.addColumn("Celular");
+        modelo.addColumn("Celular");  
         modelo.addColumn("Email");
         
         List<Cliente> lista = new ArrayList<>();
         try {
             ICliente clienteDao = new ClienteImpl();
-            lista = clienteDao.obtener();
-            
+            lista = clienteDao.obtener();            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
-             JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(),"Error", 
+                    JOptionPane.ERROR_MESSAGE);
         }
-        for(Cliente est : lista){
-            modelo.addRow(new Object[] { est.getCodCl(), est.getSucursal().getCodSu(), est.getCedula(),
-                est.getNombre(), est.getApellido(), est.getCelular(), est.getEmail()});
-            }
-           tabla.setModel(modelo); 
+        for(Cliente ins : lista){
+            modelo.addRow(new Object[]{ ins.getCodCl(), ins.getSucursal().getCodSu(), ins.getCedula(),
+            ins.getNombre(), ins.getApellido(), ins.getCelular(), ins.getEmail()});            
         }
-        
+        tabla.setModel(modelo);        
     }
-
-    
-    
-
+}

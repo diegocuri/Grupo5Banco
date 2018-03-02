@@ -22,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ANTHONY
  */
-public class FrmListaPrestamo extends JInternalFrame{
+public class FrmListaPrestamo extends JInternalFrame {
+
     JLabel lblTitulo;
     JTable tabla;
     DefaultTableModel modelo;
@@ -31,7 +32,7 @@ public class FrmListaPrestamo extends JInternalFrame{
         this.setSize(800, 600);
         this.setLayout(new BorderLayout());
         this.setClosable(true);
-        lblTitulo= new JLabel("Listado de prestamos");
+        lblTitulo= new JLabel("Listado de Prestamos");
         tabla = new JTable();
         jscTabla= new JScrollPane(tabla);
         this.add(lblTitulo, BorderLayout.NORTH);
@@ -41,21 +42,19 @@ public class FrmListaPrestamo extends JInternalFrame{
     public void cargarTabla(){
         modelo = new DefaultTableModel();
         modelo.addColumn("Código");
-        modelo.addColumn("Cod_sucursal");
-         
-        modelo.addColumn("Titulo");
-        
+        modelo.addColumn("Sucursal");
+   
         List<Prestamo> lista = new ArrayList<>();
         try {
-            IPrestamo prestamoDao = new PrestamoImpl();
-            lista = prestamoDao.obtener();            
+            IPrestamo inspectorDao = new PrestamoImpl();
+            lista = inspectorDao.obtener();            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),"Error", 
                     JOptionPane.ERROR_MESSAGE);
         }
-        for(Prestamo pre : lista){
-            modelo.addRow(new Object[]{ pre.getCodPre(), 
-            pre.getSucursal(), });            
+        for(Prestamo ins : lista){
+            modelo.addRow(new Object[]{ ins.getCodPre(), 
+            ins.getSucursal().getCodSu()});            
         }
         tabla.setModel(modelo);        
     }

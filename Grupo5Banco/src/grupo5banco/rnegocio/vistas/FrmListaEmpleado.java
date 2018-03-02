@@ -1,30 +1,25 @@
 
 package grupo5banco.rnegocio.vistas;
 
-import grupo5banco.rnegocio.dao.IEmpleado;
-import grupo5banco.rnegocio.entidades.Empleado;
-import grupo5banco.rnegocio.impl.EmpleadoImpl;
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.*;
+import grupo5banco.rnegocio.dao.*;
+import grupo5banco.rnegocio.impl.*;
+import grupo5banco.rnegocio.entidades.*;
 
-public class FrmListaEmpleado  extends JInternalFrame {
-    
-JLabel lblTitulo;
+public class FrmListaEmpleado extends JInternalFrame {
+
+    JLabel lblTitulo;
     JTable tabla;
     DefaultTableModel modelo;
     JScrollPane jscTabla;
-    public FrmListaEmpleado () {
+    public FrmListaEmpleado() {
         this.setSize(800, 600);
         this.setLayout(new BorderLayout());
         this.setClosable(true);
-        lblTitulo= new JLabel("Listado de Empleados");
+        lblTitulo= new JLabel("Listado de Empleadoes");
         tabla = new JTable();
         jscTabla= new JScrollPane(tabla);
         this.add(lblTitulo, BorderLayout.NORTH);
@@ -33,11 +28,12 @@ JLabel lblTitulo;
     }
     public void cargarTabla(){
         modelo = new DefaultTableModel();
-        modelo.addColumn("Cédula");
-        modelo.addColumn("Nombres");
-        modelo.addColumn("Apellidos");
-        modelo.addColumn("Fecha vinculacion");
-        modelo.addColumn("Fecha antiguedad");
+        modelo.addColumn("Código");
+        modelo.addColumn("Sucursal");        
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Fecha vinculacion");  
+        modelo.addColumn("Antiguedad");
         
         List<Empleado> lista = new ArrayList<>();
         try {
@@ -47,9 +43,9 @@ JLabel lblTitulo;
             JOptionPane.showMessageDialog(this, e.getMessage(),"Error", 
                     JOptionPane.ERROR_MESSAGE);
         }
-        for(Empleado empl : lista){
-            modelo.addRow(new Object[]{ empl.getCodEpl(), 
-            empl.getNombre(), empl.getApellido(), empl.getFecha_vinculacion().toString(),empl.getAntiguedad()});            
+        for(Empleado ins : lista){
+            modelo.addRow(new Object[]{ ins.getCodEpl(), ins.getSucursal().getCodSu(),
+            ins.getNombre(), ins.getApellido(), ins.getFecha_vinculacion(), ins.getAntiguedad()});            
         }
         tabla.setModel(modelo);        
     }

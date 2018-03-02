@@ -135,7 +135,7 @@ public class Menu extends JFrame {
         mniEliminaPedido = new JMenuItem("Eliminar");
         mniBuscaPedido = new JMenuItem("Buscar");
         mniListaPedido = new JMenuItem("Lista");
-         mniListaPedido.addActionListener(new ActionListener() {
+        mniListaPedido.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mniListaPedidoActionPerformed(e);
@@ -156,7 +156,13 @@ public class Menu extends JFrame {
         mniModificaCliente = new JMenuItem("Modificar");
         mniEliminaCliente = new JMenuItem("Eliminar");
         mniBuscaCliente = new JMenuItem("Buscar");
-        mniListaCliente = new JMenuItem("Lista");
+        mniBuscaCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniBuscaClienteActionPerformed(e);
+            }
+        });
+        mniListaCliente = new JMenuItem("Listar");
         mniListaCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -382,7 +388,7 @@ public class Menu extends JFrame {
     
         /////PEDIDO
     public void mniNuevoPedidoActionPerformed(ActionEvent e) {
-        FrmPedido frm = new FrmPedido();
+        FrmNuevoPedido frm = new FrmNuevoPedido();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }

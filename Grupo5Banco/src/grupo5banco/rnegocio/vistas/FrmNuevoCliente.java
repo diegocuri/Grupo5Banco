@@ -81,7 +81,9 @@ public class FrmNuevoCliente extends JInternalFrame{
         txtApellido= new JTextField(2);
         txtCelular= new JTextField(2);
         txtEmail= new JTextField(2);
+        
         cargarSucursales();
+        
         cmbSucursal= new JComboBox(lstSucursal.toArray());
         btnLimpiar= new JButton("Limpiar");
         btnAceptar= new JButton("Aceptar");
