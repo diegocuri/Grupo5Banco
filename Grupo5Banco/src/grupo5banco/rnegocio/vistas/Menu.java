@@ -315,6 +315,8 @@ public class Menu extends JFrame {
         mnbPrincipal.add(mnSucursal);
         mnbPrincipal.add(mnPedido);
         mnbPrincipal.add(mnPrestamo);
+        mnbPrincipal.add(mnPago);
+        
         mnInicio.add(mniSalir);
 
         this.setLayout(new BorderLayout());
