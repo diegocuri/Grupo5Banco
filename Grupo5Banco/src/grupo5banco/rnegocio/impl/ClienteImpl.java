@@ -20,7 +20,7 @@ public class ClienteImpl implements ICliente {
         String sql = "insert into cliente  values "
                 +"(?,?,?,?,?,?,?)";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cliente.getcodCl()));
+        lstPar.add(new Parametro(1, cliente.getCodCl()));
         lstPar.add(new Parametro(2, cliente.getSucursal().getCodSu()));
         lstPar.add(new Parametro(3, cliente.getCedula()));
         lstPar.add(new Parametro(4, cliente.getNombre()));
@@ -51,7 +51,7 @@ public class ClienteImpl implements ICliente {
                 + "celular=?, email=?"
                 + " where codCl=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cliente.getcodCl()));
+        lstPar.add(new Parametro(1, cliente.getCodCl()));
         lstPar.add(new Parametro(2, cliente.getSucursal().getCodSu()));
         lstPar.add(new Parametro(3, cliente.getCedula()));
         lstPar.add(new Parametro(4, cliente.getNombre()));
@@ -77,9 +77,9 @@ public class ClienteImpl implements ICliente {
     @Override
     public int eliminar(Cliente cliente) throws Exception {
         int numFilasAfectadas = 0;
-         String sql = "DELETE FROM cliente  where codigo=?";
+         String sql = "DELETE FROM cliente  where codCl=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cliente.getcodCl()));       
+        lstPar.add(new Parametro(1, cliente.getCodCl()));       
         Conexion con = null;
         try {
             con = new Conexion();
@@ -109,7 +109,7 @@ public class ClienteImpl implements ICliente {
             ResultSet rst = con.ejecutaQuery(sql, lstPar);
             while (rst.next()) {
                 cliente = new Cliente();
-                cliente.setcodCl(rst.getInt(1));
+                cliente.setCodCl(rst.getInt(1));
                  ISucursal sucursaldao = new SucursalImpl();
                 Sucursal sucursal = sucursaldao.obtener(rst.getInt(2));
                 cliente.setSucursal(sucursal);
@@ -143,7 +143,7 @@ public class ClienteImpl implements ICliente {
             Cliente cliente=null;
             while (rst.next()) {
                 cliente = new Cliente();
-                cliente.setcodCl(rst.getInt(1));
+                cliente.setCodCl(rst.getInt(1));
                  ISucursal sucursaldao = new SucursalImpl();
                 Sucursal sucursal = sucursaldao.obtener(rst.getInt(2));
                 cliente.setSucursal(sucursal);
