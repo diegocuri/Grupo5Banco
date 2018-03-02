@@ -9,6 +9,6 @@ public interface ICliente {
     int insertar(Cliente cliente) throws Exception;
     int modificar(Cliente cliente) throws Exception;
     int eliminar(Cliente cliente) throws Exception;
-    Cliente obtener(int CodCL) throws Exception;
+    Cliente obtener(int codCl) throws Exception;
     List<Cliente> obtener() throws Exception;
 }
