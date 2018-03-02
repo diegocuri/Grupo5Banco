@@ -24,11 +24,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public int getcodCl() {
+    public int getCodCl() {
         return codCl;
     }
 
-    public void setcodCl(int codCl) {
+    public void setCodCl(int codCl) {
         this.codCl = codCl;
     }
 
@@ -80,6 +80,4 @@ public class Cliente {
         this.email = email;
     }
 
-    }
-
-   
+}
