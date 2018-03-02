@@ -25,9 +25,7 @@ public class PrestamoImpl implements IPrestamo {
     @Override
     public int insertar(Prestamo prestamo) throws Exception {
          int numFilasAfectadas = 0;
-        String sql = "INSERT INTO prestamo(\n"
-                + "            codPre_prestamo, codSu_sucrusal, )\n"
-                + "    VALUES (?, ?);";
+        String sql = "INSERT INTO prestamo VALUES (?, ?)";
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, prestamo.getCodPre()));
         lstPar.add(new Parametro(2, prestamo.getSucursal().getCodSu()));
@@ -49,9 +47,9 @@ public class PrestamoImpl implements IPrestamo {
     @Override
     public int modificar(Prestamo prestamo) throws Exception {
           int numFilasAfectadas = 0;
-        String sql = "UPDATE prestamo\n"
-                + "   SET codPre_prestamo=? ,CodSu=?, \n"
-                + " WHERE codPre_prestamo=?";
+        String sql = "UPDATE prestamo"
+                + "   SET CodPre=?, codSu=?"
+                + " WHERE CodPre=?";
         Conexion con = new Conexion();
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, prestamo.getCodPre()));
@@ -72,8 +70,8 @@ public class PrestamoImpl implements IPrestamo {
     @Override
     public int eliminar(Prestamo prestamo) throws Exception {
           int numFilasAfectadas = 0;
-        String sql = "DELETE FROM   Prestamo\n"
-                + " WHERE codPre=?;";
+        String sql = "DELETE FROM prestamo"
+                + " WHERE CodPre=?";
         Conexion con = new Conexion();
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, prestamo.getCodPre()));
@@ -91,8 +89,7 @@ public class PrestamoImpl implements IPrestamo {
     @Override
     public Prestamo obtener(int CodPre) throws Exception {
         Prestamo prestamo = null;
-        String sql = "SELECT codPre ,codSu, \n"
-                + "  FROM prestamo where codPre=?";
+        String sql = "SELECT CodPre, codSu FROM prestamo where CodPre=?";
        Conexion con=new Conexion();
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, CodPre));
@@ -118,7 +115,7 @@ public class PrestamoImpl implements IPrestamo {
     @Override
     public List<Prestamo> obtener() throws Exception {
         List<Prestamo> lista = new ArrayList<>();
-        String sql = "SELECT codPre ,codSu \n"
+        String sql = "SELECT CodPre ,codSu"
                 + "  FROM prestamo";
         Conexion con = new Conexion();
         con.conectar();

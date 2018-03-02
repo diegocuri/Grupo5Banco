@@ -16,140 +16,153 @@ import java.util.List;
  *
  * @author Usuario
  */
-public class PedidoImpl implements IPedido{
+public class PedidoImpl implements IPedido {
 
     @Override
     public int insertar(Pedido pedido) throws Exception {
-    
-      int filasAfectadas = 0;
-        String sqlC = "INSERT INTO Producto (num_pedido, CodPre, CodCL , codIs) VALUES (?,?,?,?)";
-        ArrayList<Parametro> listParam = new ArrayList<>();
-        listParam.add(new Parametro(1, pedido.getNum_pedido()));
-        listParam.add(new Parametro(2, pedido.getPrestamo().getCodPre()));
-        listParam.add(new Parametro(3, pedido.getPrestamo().getCodPre()));
-        listParam.add(new Parametro(4, pedido.getInspector().getCodIs()));
-        Conexion conect = null;
+        int numFilasAfectadas = 0;
+        String sql = "insert into pedido  values "
+                +"(?,?,?,?)";
+        List<Parametro> lstPar = new ArrayList<>();
+        lstPar.add(new Parametro(1, pedido.getNum_pedido()));
+        lstPar.add(new Parametro(2, pedido.getPrestamo().getCodPre()));
+        lstPar.add(new Parametro(3, pedido.getCliente().getCodCl()));
+        lstPar.add(new Parametro(4, pedido.getInspector().getCodIs()));
+        
+        Conexion con = null;
         try {
-            conect = new Conexion();
-            conect.conectar();
-            filasAfectadas = conect.ejecutaComando(sqlC, listParam);
+            con = new Conexion();
+            con.conectar();
+            numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
-            System.out.println("error: " + e.getMessage());
+            throw e;
         } finally {
-            if (conect != null) {
-                conect.desconectar();
+            if (con != null) {
+                con.desconectar();
             }
         }
-        return filasAfectadas;    
+        return numFilasAfectadas;
     }
 
     @Override
     public int modificar(Pedido pedido) throws Exception {
-        int filasAfectadas = 0;
-        String sqlC = "UPDATE Producto SET num_pedido=?, CodPre=?, CodCL=?, codIs=? WHERE num_pedido=?";
-        ArrayList<Parametro> listParam = new ArrayList<>();
-        listParam.add(new Parametro(1, pedido.getNum_pedido()));
-        listParam.add(new Parametro(2, pedido.getPrestamo().getCodPre()));
-        listParam.add(new Parametro(3, pedido.getPrestamo().getCodPre()));
-        listParam.add(new Parametro(4, pedido.getInspector().getCodIs()));
-        Conexion conect = null;
+        int numFilasAfectadas = 0;
+        String sql = "UPDATE pedido"
+                   + "   SET num_pedido=?, codPre=?, codCl=?, codIs=?"
+                   + "   where num_pedido=?";
+        List<Parametro> lstPar = new ArrayList<>();
+        lstPar.add(new Parametro(1, pedido.getNum_pedido()));
+        lstPar.add(new Parametro(2, pedido.getPrestamo().getCodPre()));
+        lstPar.add(new Parametro(3, pedido.getCliente().getCodCl()));
+        lstPar.add(new Parametro(4, pedido.getInspector().getCodIs()));
+        Conexion con = null;
         try {
-            conect = new Conexion();
-            conect.conectar();
-            filasAfectadas = conect.ejecutaComando(sqlC, listParam);
+            con = new Conexion();
+            con.conectar();
+            numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
-            System.out.println("error: " + e.getMessage());
+            throw e;
         } finally {
-            if (conect != null) {
-                conect.desconectar();
+            if (con != null) {
+                con.desconectar();
             }
         }
-        return filasAfectadas;}
+        return numFilasAfectadas;
+    }
 
     @Override
     public int eliminar(Pedido pedido) throws Exception {
-       int filasAfectadas = 0;
-        String sqlC = "DELETE FROM DetallePedido WHERE codigoDetallePedido=?";
-        ArrayList<Parametro> listParam = new ArrayList<>();
-        listParam.add(new Parametro(1, pedido.getNum_pedido()));
-        Conexion conect = null;
+        int numFilasAfectadas = 0;
+         String sql = "DELETE FROM pedido  where num_pedido=?";
+        List<Parametro> lstPar = new ArrayList<>();
+        lstPar.add(new Parametro(1, pedido.getNum_pedido()));       
+        Conexion con = null;
         try {
-            conect = new Conexion();
-            conect.conectar();
-            filasAfectadas = conect.ejecutaComando(sqlC, listParam);
+            con = new Conexion();
+            con.conectar();
+            numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
-            System.out.println("error: " + e.getMessage());
+            throw e;
         } finally {
-            if (conect != null) {
-                conect.desconectar();
+            if (con != null) {
+                con.desconectar();
             }
         }
-        return filasAfectadas;}
+        return numFilasAfectadas;
+    }
 
     @Override
     public Pedido obtener(int codigo) throws Exception {
-        Pedido pedido  = null;
-        String sqlC = "SELECT num_pedido, CodPre, CodCL , codIs FROM Pedido Where num_pedido=?";
-        ArrayList<Parametro> listParam = new ArrayList<>();
-        listParam.add(new Parametro(1, codigo));
-        Conexion conect = null;
+        Pedido pedido = null;
+        String sql = "SELECT num_pedido, codPre, codCl,"
+                + "codIs FROM pedido where num_pedido=?";
+        List<Parametro> lstPar = new ArrayList<>();
+        lstPar.add(new Parametro(1, codigo));
+        Conexion con = null;
         try {
-            conect = new Conexion();
-            conect.conectar();
-            Inspector inspector = null; 
-            IInspector inspectorDao=new InspectorImpl();
-            ResultSet rst = conect.ejecutarQuery(sqlC, listParam);
+            con = new Conexion();
+            con.conectar();
+            ResultSet rst = con.ejecutaQuery(sql, lstPar);
             while (rst.next()) {
                 pedido = new Pedido();
-                inspector = new Inspector();
                 pedido.setNum_pedido(rst.getInt(1));
-                pedido.getInspector();
-                inspector = inspectorDao.obtener(rst.getInt(2));
-                pedido.setInspector(inspector);
-                pedido.setNum_pedido(rst.getInt(3));
+                IPrestamo prestamodao = new PrestamoImpl();
+                Prestamo prestamo = prestamodao.obtener(rst.getInt(2));
+                pedido.setPrestamo(prestamo);
+                
+                ICliente clientedao = new ClienteImpl();
+                Cliente cliente = clientedao.obtener(rst.getInt(3));
+                pedido.setCliente(cliente);
+                
+                IInspector inspectordao = new InspectorImpl();
+                Inspector inspector = inspectordao.obtener(rst.getInt(4));
+                pedido.setCliente(cliente);
+                
                 
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            throw e;
         } finally {
-            if (conect != null) {
-                conect.desconectar();
-            }
+            if(con!=null)
+            con.desconectar();
         }
-        return pedido; }
+        return pedido;
+    }
 
     @Override
     public List<Pedido> obtener() throws Exception {
-        ArrayList<Pedido> lstPedido=new ArrayList<>();
-        Pedido pedido = null;
-        String sqlC = "SELECT num_pedido, CodPre, CodCL , codIs FROM Pedido";
-        Conexion conect = null;
+        List<Pedido> lista = new ArrayList<>();
+         String sql = "SELECT codEpl, codSu, nombre, apellido, fecha_vinculacion, "
+                + "antiguedad  FROM pedido ";        
+        Conexion con = null;
         try {
-            conect = new Conexion();
-            conect.conectar();
-            Inspector inspector = null;
-            IInspector inspectorDao=new InspectorImpl();
-            ResultSet rst = conect.ejecutarQuery(sqlC, null);
+            con = new Conexion();
+            con.conectar();
+            ResultSet rst = con.ejecutaQuery(sql, null);
+            Pedido pedido=null;
             while (rst.next()) {
                 pedido = new Pedido();
-                inspector = new Inspector();
                 pedido.setNum_pedido(rst.getInt(1));
-                pedido.getInspector();
-                inspector = inspectorDao.obtener(rst.getInt(2));
-                pedido.setInspector(inspector);
-                pedido.setNum_pedido(rst.getInt(2));
-           
-                lstPedido.add(pedido);
+                IPrestamo prestamodao = new PrestamoImpl();
+                Prestamo prestamo = prestamodao.obtener(rst.getInt(2));
+                pedido.setPrestamo(prestamo);
+                
+                ICliente clientedao = new ClienteImpl();
+                Cliente cliente = clientedao.obtener(rst.getInt(3));
+                pedido.setCliente(cliente);
+                
+                IInspector inspectordao = new InspectorImpl();
+                Inspector inspector = inspectordao.obtener(rst.getInt(4));
+                pedido.setCliente(cliente);
+                
+                lista.add(pedido);
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            throw e;
         } finally {
-            if (conect != null) {
-                conect.desconectar();
-            }
+            if(con!=null)
+            con.desconectar();
         }
-        return lstPedido;}
-    
-    
-    
+        return lista;
+    }
 }

@@ -76,9 +76,4 @@ public class Empleado {
         this.antiguedad = antiguedad;
     }
 
-    @Override
-    public String toString() {
-        return nombre;
-    }
-
 }
