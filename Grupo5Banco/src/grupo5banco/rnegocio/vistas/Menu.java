@@ -20,7 +20,6 @@ public class Menu extends JFrame {
     JMenuItem mniLogin;
     JMenuItem mniSalir;
 
-    JMenu mnDocente;
     JMenu mnEmpleado;
     JMenu mnCliente;
     JMenu mnCuenta;
@@ -29,43 +28,53 @@ public class Menu extends JFrame {
     JMenu mnPrestamo;
     JMenu mnPago;
     JMenu mnPedido;
-
-    JMenuItem mniNuevoPedido;
-    JMenuItem mniModificaPedido;
-    JMenuItem mniEliminaPedido;
-    JMenuItem mniBuscaPedido;
-    JMenuItem mniListaPedido;
+    
+    
+    
     //** Empleado**
-    JMenuItem mniNuevoEmpleado;
+        JMenuItem mniNuevoEmpleado;
     JMenuItem mniModificaEmpleado;
     JMenuItem mniEliminaEmpleado;
     JMenuItem mniBuscaEmpleado;
     JMenuItem mniListaEmpleado;
-
+    
+    //** Cliente**
     JMenuItem mniNuevoCliente;
     JMenuItem mniModificaCliente;
     JMenuItem mniEliminaCliente;
     JMenuItem mniBuscaCliente;
     JMenuItem mniListaCliente;
 
+
+    //** Pedido**
+    JMenuItem mniNuevoPedido;
+    JMenuItem mniModificaPedido;
+    JMenuItem mniEliminaPedido;
+    JMenuItem mniBuscaPedido;
+    JMenuItem mniListaPedido;
+    
+    //** Inspector**
     JMenuItem mniNuevoInspector;
     JMenuItem mniModificaInspector;
     JMenuItem mniEliminaInspector;
     JMenuItem mniBuscaInspector;
     JMenuItem mniListaInspector;
     
+    //** Prestamo**
     JMenuItem mniNuevoPrestamo;
     JMenuItem mniModificaPrestamo;
     JMenuItem mniEliminaPrestamo;
     JMenuItem mniBuscaPrestamo;
     JMenuItem mniListaPrestamo;
     
+    //** Pago**
     JMenuItem mniNuevoPago;
     JMenuItem mniModificaPago;
     JMenuItem mniEliminaPago;
     JMenuItem mniBuscaPago;
     JMenuItem mniListaPago;
-    //** sucursal**
+    
+    //** Sucursal**
     JMenuItem mniNuevoSucursal;
     JMenuItem mniModificaSucursal;
     JMenuItem mniEliminaSucursal;
@@ -85,6 +94,7 @@ public class Menu extends JFrame {
         mnInicio = new JMenu("Inicio");
         mniLogin = new JMenuItem("Iniciar Sesión");
         mniSalir = new JMenuItem("Salir");
+        
         //** Empleado**
         mnEmpleado = new JMenu("Empleado");
         mniNuevoEmpleado = new JMenuItem("Nuevo");
@@ -111,6 +121,7 @@ public class Menu extends JFrame {
             }
         });
         
+        //** Pedido**
         mnPedido = new JMenu("Pedido");
         mniNuevoPedido = new JMenuItem("Nuevo");
         mniNuevoPedido.addActionListener(new ActionListener() {
@@ -132,7 +143,7 @@ public class Menu extends JFrame {
         });
         
         
-        /////
+        //** Cliente**
         mnCliente = new JMenu("Cliente");
         mniNuevoCliente = new JMenuItem("Nuevo");
         mniNuevoCliente.addActionListener(new ActionListener() {
@@ -153,7 +164,7 @@ public class Menu extends JFrame {
             }
         });
         
-
+        //** Inspector**
         mnInspector = new JMenu("Inspector");
         mniNuevoInspector = new JMenuItem("Nuevo");
         mniNuevoInspector.addActionListener(new ActionListener() {
@@ -178,6 +189,7 @@ public class Menu extends JFrame {
                 mniListaInspectorActionPerformed(e);
             }           
         });
+        
         //** Prestamo**
         mnPrestamo = new JMenu("Prestamo");
         mniNuevoPrestamo = new JMenuItem("Nuevo");
@@ -191,6 +203,13 @@ public class Menu extends JFrame {
         mniEliminaPrestamo = new JMenuItem("Eliminar");
         mniBuscaPrestamo = new JMenuItem("Buscar");
         mniListaPrestamo = new JMenuItem("Lista");
+        mniListaPrestamo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniListaPrestamoActionPerformed(e);
+            }
+        });
+        
         //** Pago**
         mnPago = new JMenu("Pago");
         mniNuevoPago = new JMenuItem("Nuevo");
@@ -205,7 +224,8 @@ public class Menu extends JFrame {
         mniBuscaPago = new JMenuItem("Buscar");
         mniListaPago = new JMenuItem("Lista");
 
-        //** sucursal**
+        
+        //** Sucursal**
         mnSucursal = new JMenu("Sucursal");
         mniNuevoSucursal = new JMenuItem("Nuevo");
         mniNuevoSucursal.addActionListener(new ActionListener() {
@@ -232,7 +252,7 @@ public class Menu extends JFrame {
         });
         
 
-        /////
+        /////Empleado
         mnEmpleado.add(mniNuevoEmpleado);
         mnEmpleado.add(mniModificaEmpleado);
         mnEmpleado.add(mniEliminaEmpleado);
@@ -240,13 +260,15 @@ public class Menu extends JFrame {
         mnEmpleado.add(mniBuscaEmpleado);
         mnEmpleado.add(mniListaEmpleado);
 
+        /////Cliente
         mnCliente.add(mniNuevoCliente);
         mnCliente.add(mniModificaCliente);
         mnCliente.add(mniEliminaCliente);
         mnCliente.addSeparator();
         mnCliente.add(mniBuscaCliente);
         mnCliente.add(mniListaCliente);
-
+        
+        /////Inspector
         mnInspector.add(mniNuevoInspector);
         mnInspector.add(mniModificaInspector);
         mnInspector.add(mniEliminaInspector);
@@ -254,6 +276,7 @@ public class Menu extends JFrame {
         mnInspector.add(mniBuscaInspector);
         mnInspector.add(mniListaInspector);
 
+        /////Sucursal
         mnSucursal.add(mniNuevoSucursal);
         mnSucursal.add(mniModificaSucursal);
         mnSucursal.add(mniEliminaSucursal);
@@ -261,6 +284,7 @@ public class Menu extends JFrame {
         mnSucursal.add(mniBuscaSucursal);
         mnSucursal.add(mniListaSucursal);
         
+        /////Prestamo
         mnPrestamo.add(mniNuevoPrestamo);
         mnPrestamo.add(mniModificaPrestamo);
         mnPrestamo.add(mniEliminaPrestamo);
@@ -268,6 +292,7 @@ public class Menu extends JFrame {
         mnPrestamo.add(mniBuscaPrestamo);
         mnPrestamo.add(mniListaPrestamo);
         
+        /////Pago
         mnPago.add(mniNuevoPago);
         mnPago.add(mniModificaPago);
         mnPago.add(mniEliminaPago);
@@ -275,6 +300,7 @@ public class Menu extends JFrame {
         mnPago.add(mniBuscaPago);
         mnPago.add(mniListaPago);
         
+        /////Pedido
         mnPedido.add(mniNuevoPedido);
         mnPedido.add(mniModificaPedido);
         mnPedido.add(mniEliminaPedido);
@@ -282,11 +308,13 @@ public class Menu extends JFrame {
         mnPedido.add(mniBuscaPedido);
         mnPedido.add(mniListaPedido);
 
+        /////Menu Principal
         mnbPrincipal.add(mnEmpleado);
         mnbPrincipal.add(mnCliente);
         mnbPrincipal.add(mnInspector);
         mnbPrincipal.add(mnSucursal);
         mnbPrincipal.add(mnPedido);
+        mnbPrincipal.add(mnPrestamo);
         mnInicio.add(mniSalir);
 
         this.setLayout(new BorderLayout());
@@ -296,6 +324,8 @@ public class Menu extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE); //Para terminar el programa
 
     }
+    
+        //////CLIENTE
      public void mniNuevoClienteActionPerformed(ActionEvent e){
         FrmNuevoCliente frm = new FrmNuevoCliente();
         dkpEscritorio.add(frm);
@@ -312,6 +342,8 @@ public class Menu extends JFrame {
         frm.setVisible(true);
     }
 
+     
+        /////EMPLEADO
     public void mniNuevoEmpleadoActionPerformed(ActionEvent e) {
         FrmNuevoEmpleado frm = new FrmNuevoEmpleado();
         dkpEscritorio.add(frm);
@@ -330,6 +362,8 @@ public class Menu extends JFrame {
         frm.setVisible(true);
     }
 
+    
+      //////SUCURSAL
     public void mniNuevoSucursalActionPerformed(ActionEvent e) {
         FrmNuevoSucursal frm = new FrmNuevoSucursal();
         dkpEscritorio.add(frm);
@@ -346,6 +380,7 @@ public class Menu extends JFrame {
         frm.setVisible(true);
     }
     
+        /////PEDIDO
     public void mniNuevoPedidoActionPerformed(ActionEvent e) {
         FrmPedido frm = new FrmPedido();
         dkpEscritorio.add(frm);
@@ -358,6 +393,7 @@ public class Menu extends JFrame {
         frm.setVisible(true);
     }
     
+        /////PRESTAMO
     public void mniNuevoPrestamoActionPerformed(ActionEvent e) {
         FrmNuevoPrestamo frm = new FrmNuevoPrestamo();
         dkpEscritorio.add(frm);
@@ -370,6 +406,7 @@ public class Menu extends JFrame {
         frm.setVisible(true);
     }
     
+        /////PAGO
     public void mniNuevoPagoActionPerformed(ActionEvent e) {
         FrmNuevoPago frm = new FrmNuevoPago();
         dkpEscritorio.add(frm);
@@ -381,12 +418,14 @@ public class Menu extends JFrame {
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
+    
+        /////INSPECTOR
     public void mniNuevoInspectorActionPerformed(ActionEvent e){
         FrmNuevoInspector frm = new FrmNuevoInspector();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
-        public void mniListaInspectorActionPerformed(ActionEvent e){
+    public void mniListaInspectorActionPerformed(ActionEvent e){
         FrmListaInspector frm = new FrmListaInspector();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
