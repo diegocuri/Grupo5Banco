@@ -137,7 +137,7 @@ public class FrmNuevoCliente extends JInternalFrame{
     public void btnAceptarActionListener(ActionEvent e){
         ICliente clienteDao = new ClienteImpl();
         Cliente cliente = new Cliente();
-        cliente.setcodCl(Integer.parseInt(txtCodigo.getText()));
+        cliente.setCodCl(Integer.parseInt(txtCodigo.getText()));
         cliente.setSucursal((Sucursal) cmbSucursal.getSelectedItem());
         cliente.setCedula(txtCedula.getText());
         cliente.setNombre(txtNombre.getText());

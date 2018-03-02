@@ -124,10 +124,24 @@ public class Menu extends JFrame {
         /////
         mnCliente = new JMenu("Cliente");
         mniNuevoCliente = new JMenuItem("Nuevo");
+        mniNuevoCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniNuevoClienteActionPerformed(e);
+            }
+        });
+        
         mniModificaCliente = new JMenuItem("Modificar");
         mniEliminaCliente = new JMenuItem("Eliminar");
         mniBuscaCliente = new JMenuItem("Buscar");
         mniListaCliente = new JMenuItem("Lista");
+        mniListaCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniListaClienteActionPerformed(e);
+            }
+        });
+        
 
         mnInspector = new JMenu("Inspector");
         mniNuevoInspector = new JMenuItem("Nuevo");
@@ -192,8 +206,19 @@ public class Menu extends JFrame {
         mniModificaSucursal = new JMenuItem("Modificar");
         mniEliminaSucursal = new JMenuItem("Eliminar");
         mniBuscaSucursal = new JMenuItem("Buscar");
+        mniBuscaSucursal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniBuscaSucursalActionPerformed(e);
+            }
+        });
         mniListaSucursal = new JMenuItem("Lista");
-        
+        mniListaSucursal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniListaSucursalActionPerformed(e);
+            }
+        });
         
 
         /////
@@ -260,6 +285,21 @@ public class Menu extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE); //Para terminar el programa
 
     }
+     public void mniNuevoClienteActionPerformed(ActionEvent e){
+        FrmNuevoCliente frm = new FrmNuevoCliente();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+     public void mniListaClienteActionPerformed(ActionEvent e){
+        FrmListaCliente frm = new FrmListaCliente();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+     public void mniBuscaClienteActionPerformed(ActionEvent e){
+        FrmBuscarCliente frm = new FrmBuscarCliente();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
 
     public void mniNuevoEmpleadoActionPerformed(ActionEvent e) {
         FmrNuevoEmpleado frm = new FmrNuevoEmpleado();
@@ -269,6 +309,16 @@ public class Menu extends JFrame {
 
     public void mniNuevoSucursalActionPerformed(ActionEvent e) {
         FrmNuevoSucursal frm = new FrmNuevoSucursal();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+    public void mniListaSucursalActionPerformed(ActionEvent e) {
+        FrmListaSucursal frm = new FrmListaSucursal();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+    public void mniBuscaSucursalActionPerformed(ActionEvent e) {
+        FrmBuscarSucursal frm = new FrmBuscarSucursal();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
