@@ -97,8 +97,19 @@ public class Menu extends JFrame {
         mniModificaEmpleado = new JMenuItem("Modificar");
         mniEliminaEmpleado = new JMenuItem("Eliminar");
         mniBuscaEmpleado = new JMenuItem("Buscar");
+        mniBuscaEmpleado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniBuscarEmpleadoActionPerformed(e);
+            }
+        });
         mniListaEmpleado = new JMenuItem("Lista");
-        
+        mniListaEmpleado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mniListaEmpleadoActionPerformed(e);
+            }
+        });
         
         mnPedido = new JMenu("Pedido");
         mniNuevoPedido = new JMenuItem("Nuevo");
@@ -302,7 +313,19 @@ public class Menu extends JFrame {
     }
 
     public void mniNuevoEmpleadoActionPerformed(ActionEvent e) {
-        FmrNuevoEmpleado frm = new FmrNuevoEmpleado();
+        FrmNuevoEmpleado frm = new FrmNuevoEmpleado();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+    
+    public void mniListaEmpleadoActionPerformed(ActionEvent e) {
+        FrmListaEmpleado frm = new FrmListaEmpleado();
+        dkpEscritorio.add(frm);
+        frm.setVisible(true);
+    }
+
+    public void mniBuscarEmpleadoActionPerformed(ActionEvent e) {
+        FrmBuscarEmpleado frm = new FrmBuscarEmpleado();
         dkpEscritorio.add(frm);
         frm.setVisible(true);
     }
