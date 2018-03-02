@@ -56,7 +56,7 @@ public class FrmListaCliente extends JInternalFrame{
         }
         for(Cliente est : lista){
             modelo.addRow(new Object[] { est.getCodCl(), est.getSucursal().getCodSu(), est.getCedula(),
-                est.getNombre(), est.getApellido(), est.getCelular(), est.getEmail(),});
+                est.getNombre(), est.getApellido(), est.getCelular(), est.getEmail()});
             }
            tabla.setModel(modelo); 
         }
