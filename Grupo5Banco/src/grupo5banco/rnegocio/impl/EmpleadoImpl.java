@@ -45,9 +45,10 @@ public class EmpleadoImpl implements IEmpleado {
         int numFilasAfectadas = 0;
         String sql = "UPDATE empleado"
                 + "   SET codEpl=?, codSu=?, nombre=?, apellido=?, "
-                + " fecha_vinculacion=?, antiguedad=?"
-                + " where codCl=?";
+                + "fecha_vinculacion=?, antiguedad=?"
+                + " where codEpl=?";
         List<Parametro> lstPar = new ArrayList<>();
+        
         lstPar.add(new Parametro(1, empleado.getCodEpl()));
         lstPar.add(new Parametro(2, empleado.getSucursal().getCodSu()));
         lstPar.add(new Parametro(3, empleado.getNombre()));
@@ -127,7 +128,7 @@ public class EmpleadoImpl implements IEmpleado {
     @Override
     public List<Empleado> obtener() throws Exception {
         List<Empleado> lista = new ArrayList<>();
-         String sql = "SELECT codEpl, codSu, nombre, apellido, fecha_vinculacion, antiguedad"
+         String sql = "SELECT codCl, codSu, cedula, nombre, apellido, celular, email"
                 + "FROM empleado ";        
         Conexion con = null;
         try {
@@ -136,7 +137,7 @@ public class EmpleadoImpl implements IEmpleado {
             ResultSet rst = con.ejecutaQuery(sql, null);
             Empleado empleado=null;
             while (rst.next()) {
-                 empleado = new Empleado();
+                empleado = new Empleado();
                 empleado.setCodEpl(rst.getInt(1));
                  ISucursal sucursaldao = new SucursalImpl();
                 Sucursal sucursal = sucursaldao.obtener(rst.getInt(2));
@@ -145,7 +146,8 @@ public class EmpleadoImpl implements IEmpleado {
                 empleado.setApellido(rst.getString(4));
                 empleado.setFecha_vinculacion(rst.getDate(5));
                 empleado.setAntiguedad(rst.getInt(6));
-                lista.add(empleado);
+          
+               lista.add(empleado);
             }
         } catch (Exception e) {
             throw e;
