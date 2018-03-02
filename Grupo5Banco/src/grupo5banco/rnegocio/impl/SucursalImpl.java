@@ -20,16 +20,17 @@ import java.util.List;
 public class SucursalImpl implements ISucursal {
 
     @Override
-    public int insertar(Sucursal sucursal) throws Exception {
+    public int insertar(Sucursal sucursales) throws Exception {
         int numFilasAfectadas = 0;
-        String sql = "insert into sucursal values(?,?)";
+        String sql = "insert into sucursales values(?,?)";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, sucursal.getCodSu()));
-        lstPar.add(new Parametro(2, sucursal.getCiudad()));
-        
-        Conexion con = new Conexion();
-        con.conectar();
+        lstPar.add(new Parametro(1, sucursales.getCodSu()));
+        lstPar.add(new Parametro(2, sucursales.getCiudad()));
+    
+        Conexion con = null;
         try {
+            con = new Conexion();
+            con.conectar();
             numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
             throw e;
@@ -37,81 +38,93 @@ public class SucursalImpl implements ISucursal {
             con.desconectar();
         }
         return numFilasAfectadas;
-        
     }
 
     @Override
-    public int modificar(Sucursal sucursal) throws Exception {
+    public int modificar(Sucursal sucursales) throws Exception {
         int numFilasAfectadas = 0;
-        String sql = "update sucursal set ciudad= '"+sucursal.getCiudad()
-                + "' where  codSu = " + sucursal.getCodSu();
-        Conexion con = new Conexion();
+        String sql = "update  sucursales set CodSu=?, ciudad=? where CodSu=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, sucursal.getCiudad()));
-        con.conectar();
+        lstPar.add(new Parametro(1, sucursales.getCodSu()));
+        lstPar.add(new Parametro(2, sucursales.getCiudad()));
+        
+        Conexion con = null;
         try {
-            numFilasAfectadas = con.ejecutaComando(sql);
+            con = new Conexion();
+            con.conectar();
+            numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
             throw e;
         } finally {
             con.desconectar();
         }
         return numFilasAfectadas;
-        
     }
 
     @Override
-    public int eliminar(Sucursal sucursal) throws Exception {
-int numFilasAfectadas = 0;
-        String sql = "delete from sucursal WHERE codSu=" + sucursal.getCodSu();
-        Conexion con = new Conexion();
-        con.conectar();
+    public int eliminar(Sucursal sucursales) throws Exception {
+        int numFilasAfectadas = 0;
+        String sql = "DELETE FROM sucursales  where CodSu=?";
+        List<Parametro> lstPar = new ArrayList<>();
+        lstPar.add(new Parametro(1, sucursales.getCodSu()));
+              
+        Conexion con = null;
         try {
-            numFilasAfectadas = con.ejecutaComando(sql);
+            con = new Conexion();
+            con.conectar();
+            numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
             throw e;
         } finally {
-            con.desconectar();
+            if (con != null) {
+                con.desconectar();
+            }
         }
-        return numFilasAfectadas;    }
+        
+        return numFilasAfectadas;
+    }
 
     @Override
-    public Sucursal obtener(int codSu) throws Exception {
-   Sucursal sucursal = null;
-        String sql = "select codSu, ciudad from sucursal where codSu=?";
-        Conexion con = new Conexion();
-        
-        List<Parametro> lstPar=new ArrayList<>();
-        lstPar.add(new Parametro(1, codSu));
-        con.conectar();
+    public Sucursal obtener(int idSucursal) throws Exception {
+        Sucursal sucursales = null;
+         String sql = "select CodSu, ciudad from sucursales where CodSu=?"; 
+          List<Parametro> lstPar = new ArrayList<>();
+        lstPar.add(new Parametro(1, idSucursal));
+        Conexion con = null;
         try {
-            ResultSet rst = con.ejecutarQuery(sql,lstPar);
-            while (rst.next()) {
-                sucursal=new Sucursal();
-                sucursal.setCodSu(rst.getInt(1));
-                sucursal.setCiudad(rst.getString(2));               
+            con = new Conexion();
+            con.conectar();
+            ResultSet rst = con.ejecutaQuery(sql, lstPar);            
+            while(rst.next()){
+                sucursales= new Sucursal();
+                sucursales.setCodSu(rst.getInt(1));
+                sucursales.setCiudad(rst.getString(2));            
+             
             }
         } catch (Exception e) {
             throw e;
         } finally {
             con.desconectar();
         }
-        return sucursal;    }
+        return sucursales;
+    }
 
     @Override
     public List<Sucursal> obtener() throws Exception {
-         List<Sucursal> lista = new ArrayList<>();
-        
-        String sql = "select codSu, ciudad from sucursal";
-        Conexion con = new Conexion();
-        con.conectar();
+        List<Sucursal> lista = new ArrayList<>();
+         String sql = "select CodSu, ciudad from sucursales";        
+        Conexion con = null;
         try {
-            ResultSet rst = con.ejecutarQuery(sql);
-            while (rst.next()) {
-                Sucursal sucursal = new Sucursal();
-                sucursal.setCodSu(rst.getInt(1));
-                sucursal.setCiudad(rst.getString(2));
-                lista.add(sucursal);
+            con = new Conexion();
+            con.conectar();
+            ResultSet rst = con.ejecutaQuery(sql, null);
+            Sucursal sucursales= null;
+            while(rst.next()){
+                sucursales= new Sucursal();
+                sucursales.setCodSu(rst.getInt(1));
+                sucursales.setCiudad(rst.getString(2));            
+        
+                lista.add(sucursales);
             }
         } catch (Exception e) {
             throw e;
@@ -120,5 +133,5 @@ int numFilasAfectadas = 0;
         }
         return lista;
     }
-    
+
 }
