@@ -9,9 +9,9 @@ import grupo5banco.rnegocio.entidades.Inspector;
 import java.util.List;
 
 public interface IInspector {
-     int insertar(Inspector empleado) throws Exception;
-    int modificar(Inspector empleado) throws Exception;
-    int eliminar(Inspector empleado) throws Exception;
+     int insertar(Inspector inspector) throws Exception;
+    int modificar(Inspector inspector) throws Exception;
+    int eliminar(Inspector inspector) throws Exception;
     Inspector obtener(int codIs) throws Exception;
     List<Inspector> obtener() throws Exception;
     
