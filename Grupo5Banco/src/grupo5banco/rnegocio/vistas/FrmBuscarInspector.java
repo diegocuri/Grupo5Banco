@@ -183,7 +183,7 @@ public class FrmBuscarInspector extends javax.swing.JInternalFrame {
        if(confirmation == JOptionPane.YES_NO_OPTION)
         try {
             if(inspectorDao.eliminar(inspector)>0){
-                JOptionPane.showMessageDialog(this, "Inspector eliminada correctamente!!",
+                JOptionPane.showMessageDialog(this, "Inspector eliminado correctamente!!",
                         "Transaccion Correcta", JOptionPane.INFORMATION_MESSAGE);
                 limpiarControles();
             }
