@@ -164,7 +164,7 @@ public class FrmBuscarCliente extends javax.swing.JInternalFrame {
             cliente = clienteDao.obtener(
                     Integer.parseInt(txtBuscarCodigo.getText()));
             if (cliente != null) {
-                txtCodigo.setText(Integer.toString(cliente.getCodCL()));
+                txtCodigo.setText(Integer.toString(cliente.getcodCl()));
                 txtNombre.setText(cliente.getNombre());
             }
         } catch (Exception e) {
