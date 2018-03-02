@@ -3,7 +3,7 @@ package grupo5banco.rnegocio.entidades;
 
 
 public class Cliente {
-    private int CodCL;
+    private int codCl;
     private Sucursal sucursal;
     private String cedula;
     private String nombre;
@@ -14,8 +14,8 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int CodCL, Sucursal sucursal, String cedula, String nombre, String apellido, String celular, String email) {
-        this.CodCL = CodCL;
+    public Cliente(int codCl, Sucursal sucursal, String cedula, String nombre, String apellido, String celular, String email) {
+        this.codCl = codCl;
         this.sucursal = sucursal;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -24,12 +24,12 @@ public class Cliente {
         this.email = email;
     }
 
-    public int getCodCL() {
-        return CodCL;
+    public int getcodCl() {
+        return codCl;
     }
 
-    public void setCodCL(int CodCL) {
-        this.CodCL = CodCL;
+    public void setcodCl(int codCl) {
+        this.codCl = codCl;
     }
 
     public Sucursal getSucursal() {
