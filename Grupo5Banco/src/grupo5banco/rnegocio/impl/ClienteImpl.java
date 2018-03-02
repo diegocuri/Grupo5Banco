@@ -16,55 +16,60 @@ public class ClienteImpl implements ICliente {
 
     @Override
     public int insertar(Cliente cliente) throws Exception {
-
         int numFilasAfectadas = 0;
-        String sql = "INSERT INTO empleado(\n"
-                + "            codCL,id_sucursal, cedula,nombre, apellido,cedula,Celular,email )\n"
-                + "    VALUES (?, ?, ?, ?, ?, ?,?)";
+        String sql = "insert into cliente  values "
+                +"(?,?,?,?,?,?,?)";
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, cliente.getCodCL()));
         lstPar.add(new Parametro(2, cliente.getSucursal().getCodSu()));
-        lstPar.add(new Parametro(3, cliente.getNombre()));
-        lstPar.add(new Parametro(4, cliente.getApellido()));
-        lstPar.add(new Parametro(5, cliente.getCedula()));
-        lstPar.add(new Parametro(5, cliente.getCelular()));
-        lstPar.add(new Parametro(6, cliente.getEmail()));
+        lstPar.add(new Parametro(3, cliente.getCedula()));
+        lstPar.add(new Parametro(4, cliente.getNombre()));
+        lstPar.add(new Parametro(5, cliente.getApellido()));
+        lstPar.add(new Parametro(6, cliente.getCelular()));
+        lstPar.add(new Parametro(7, cliente.getEmail()));
 
-        Conexion con = new Conexion();
-        con.conectar();
+        Conexion con = null;
         try {
+            con = new Conexion();
+            con.conectar();
             numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
             throw e;
         } finally {
-            con.desconectar();
+            if (con != null) {
+                con.desconectar();
+            }
         }
         return numFilasAfectadas;
-
     }
 
     @Override
     public int modificar(Cliente cliente) throws Exception {
         int numFilasAfectadas = 0;
-        String sql = "UPDATE cliente\n"
-                + "   SET codCL=? ,codSu_sucursal=? nombre=?, apellido=?, cedula=?, celular=?, email, \n"
-                + " WHERE codCL=?";
-        Conexion con = new Conexion();
+        String sql = "UPDATE cliente"
+                + "   SET CodCL=?, codSu=?, cedula=?, nombre=?, apellido=?, "
+                + "celular=?, email=?"
+                + " where CodCL=?";
         List<Parametro> lstPar = new ArrayList<>();
+        lstPar.add(new Parametro(1, cliente.getCodCL()));
         lstPar.add(new Parametro(2, cliente.getSucursal().getCodSu()));
-        lstPar.add(new Parametro(3, cliente.getNombre()));
-        lstPar.add(new Parametro(4, cliente.getApellido()));
-        lstPar.add(new Parametro(5, cliente.getCedula()));
-        lstPar.add(new Parametro(5, cliente.getCelular()));
-        lstPar.add(new Parametro(6, cliente.getEmail()));
+        lstPar.add(new Parametro(3, cliente.getCedula()));
+        lstPar.add(new Parametro(4, cliente.getNombre()));
+        lstPar.add(new Parametro(5, cliente.getApellido()));
+        lstPar.add(new Parametro(6, cliente.getCelular()));
+        lstPar.add(new Parametro(7, cliente.getEmail()));
 
-        con.conectar();
+        Conexion con = null;
         try {
+            con = new Conexion();
+            con.conectar();
             numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
             throw e;
         } finally {
-            con.desconectar();
+            if (con != null) {
+                con.desconectar();
+            }
         }
         return numFilasAfectadas;
     }
@@ -72,49 +77,54 @@ public class ClienteImpl implements ICliente {
     @Override
     public int eliminar(Cliente cliente) throws Exception {
         int numFilasAfectadas = 0;
-        String sql = "DELETE FROM   Cliente\n"
-                + " WHERE codCL=?;";
-        Conexion con = new Conexion();
+         String sql = "DELETE FROM cliente  where codigo=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, cliente.getCodCL()));
-        con.conectar();
+        lstPar.add(new Parametro(1, cliente.getCodCL()));       
+        Conexion con = null;
         try {
+            con = new Conexion();
+            con.conectar();
             numFilasAfectadas = con.ejecutaComando(sql, lstPar);
         } catch (Exception e) {
             throw e;
         } finally {
-            con.desconectar();
+            if (con != null) {
+                con.desconectar();
+            }
         }
         return numFilasAfectadas;
     }
 
     @Override
-    public Cliente obtener(int codCL) throws Exception {
+    public Cliente obtener(int codigo) throws Exception {
         Cliente cliente = null;
-        String sql = "SELECT codCl ,codSu_sucursal, nombre, apellido, cedula,celular,email \n"
-                + "  FROM cliente where codCL=?";
-        Conexion con = new Conexion();
-
+        String sql = "SELECT CodCL, codSu, cedula, nombre, apellido, celular, email"
+                + "FROM cliente where codigo=?";
         List<Parametro> lstPar = new ArrayList<>();
-        lstPar.add(new Parametro(1, codCL));
-        con.conectar();
+        lstPar.add(new Parametro(1, codigo));
+        Conexion con = null;
         try {
-            ResultSet rst = con.ejecutarQuery(sql, lstPar);
+            con = new Conexion();
+            con.conectar();
+            ResultSet rst = con.ejecutaQuery(sql, lstPar);
             while (rst.next()) {
-                ICliente ob = new ClienteImpl();
-                ISucursal su = new SucursalImpl();
                 cliente = new Cliente();
                 cliente.setCodCL(rst.getInt(1));
-                cliente.setSucursal(su.obtener(rst.getInt(2)));
+                 ISucursal sucursaldao = new SucursalImpl();
+                Sucursal sucursal = sucursaldao.obtener(rst.getInt(2));
+                cliente.setSucursal(sucursal);
                 cliente.setCedula(rst.getString(3));
                 cliente.setNombre(rst.getString(4));
                 cliente.setApellido(rst.getString(5));
                 cliente.setCelular(rst.getString(6));
                 cliente.setEmail(rst.getString(7));
+          
+  
             }
         } catch (Exception e) {
             throw e;
         } finally {
+            if(con!=null)
             con.desconectar();
         }
         return cliente;
@@ -122,34 +132,34 @@ public class ClienteImpl implements ICliente {
 
     @Override
     public List<Cliente> obtener() throws Exception {
-          List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT codCL ,codSu_sucursal, cedula,nombre, apellido, celular,email \n"
-                + "  FROM cliente";
-        Conexion con = new Conexion();
-        con.conectar();
+        List<Cliente> lista = new ArrayList<>();
+         String sql = "SELECT CodCL, codSu, cedula, nombre, apellido, celular, email"
+                + "FROM cliente ";        
+        Conexion con = null;
         try {
-            ResultSet rst = con.ejecutarQuery(sql);
+            con = new Conexion();
+            con.conectar();
+            ResultSet rst = con.ejecutaQuery(sql, null);
+            Cliente cliente=null;
             while (rst.next()) {
-                Cliente cliente;
-                ICliente ob = new ClienteImpl();
-                ISucursal su = new SucursalImpl();
                 cliente = new Cliente();
                 cliente.setCodCL(rst.getInt(1));
-                cliente.setSucursal(su.obtener(rst.getInt(2)));
+                 ISucursal sucursaldao = new SucursalImpl();
+                Sucursal sucursal = sucursaldao.obtener(rst.getInt(2));
+                cliente.setSucursal(sucursal);
                 cliente.setCedula(rst.getString(3));
                 cliente.setNombre(rst.getString(4));
                 cliente.setApellido(rst.getString(5));
                 cliente.setCelular(rst.getString(6));
                 cliente.setEmail(rst.getString(7));
-                lista.add(cliente);
+               lista.add(cliente);
             }
         } catch (Exception e) {
             throw e;
         } finally {
+            if(con!=null)
             con.desconectar();
         }
         return lista;
-
     }
-
 }
