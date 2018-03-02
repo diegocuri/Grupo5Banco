@@ -99,7 +99,7 @@ public class ClienteImpl implements ICliente {
     public Cliente obtener(int codigo) throws Exception {
         Cliente cliente = null;
         String sql = "SELECT codCl, codSu, cedula, nombre, apellido, celular, email"
-                + "FROM cliente where codigo=?";
+                + "FROM cliente where codCl=?";
         List<Parametro> lstPar = new ArrayList<>();
         lstPar.add(new Parametro(1, codigo));
         Conexion con = null;
